@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: #1C1C21;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1280px;
+  position: relative;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  margin: auto 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.text__color_default {
+  color: #8585AD;
+}
