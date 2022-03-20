@@ -1,10 +1,17 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* * {
+  outline: 1px solid blue;
+} */
+
 
 .appBackground {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #131316;
-  
+}
+
+.appContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

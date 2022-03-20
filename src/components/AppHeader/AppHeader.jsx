@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import {Box} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
 import {BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
@@ -17,7 +17,7 @@ function AppHeader() {
           </div>
           <div className={`${headerStyles.nav__link} pl-5 pr-5 pt-4 pb-4 ml-2`}>
             <ListIcon type="secondary" />
-            <p className={`text text_type_main-default ml-2 ${headerStyles.text__color_default}`}>Лента заказов</p>
+            <p className={`text text_type_main-default ml-2 text_color_inactive`}>Лента заказов</p>
           </div>
         </nav>
         <div className={`${headerStyles.logo}`}>
@@ -25,7 +25,7 @@ function AppHeader() {
         </div>
         <div className={`${headerStyles.nav__link} pl-5 pr-5 pt-4 pb-4`}>
           <ProfileIcon type="secondary" />
-          <p className={`text text_type_main-default ml-2 ${headerStyles.text__color_default}`}>Личный кабинет</p>
+          <p className={`text text_type_main-default ml-2 text_color_inactive`}>Личный кабинет</p>
         </div>
       </div>
     </header>
