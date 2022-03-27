@@ -1,21 +1,16 @@
-import React from 'react';
-import navigationStyle from './navigationBar.module.css'
+import React, {useEffect} from 'react';
+import navigationStyle from './navigationBar.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
+
 const NavigationBar = () => {
-  const [current, setCurrent] = React.useState('one')
+  const [current, setCurrent] = React.useState('Булки')
   return (
-    <nav className={`${navigationStyle.navigation}`}>
-      <Tab value="one" active={current === 'one'} onClick={setCurrent}>
-        Булки
-      </Tab>
-      <Tab value="two" active={current === 'two'} onClick={setCurrent}>
-        Соусы
-      </Tab>
-      <Tab value="three" active={current === 'three'} onClick={setCurrent}>
-        Начинки
-      </Tab>
-    </nav>
+    <div className={`${navigationStyle.navigation}`}>
+        <a href='#buns' className={`${navigationStyle.links}`}><Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>Булки</Tab></a>
+        <a href='#sauces' className={`${navigationStyle.links}`}><Tab value="Соусы" active={current === 'Соусы'} onClick={setCurrent}>Соусы</Tab></a>
+        <a href='#fillings' className={`${navigationStyle.links}`}><Tab value="Начинки" active={current === 'Начинки'} onClick={setCurrent}>Начинки</Tab></a>
+    </div>
   )
 }
 

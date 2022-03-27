@@ -5,7 +5,6 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 function BurgerCard(props) {
-  // console.log(props.burgerCard.name);
   return (
     <li className={`${cardStyle.cardSize}`}>
       <Counter count={1} size="default" />

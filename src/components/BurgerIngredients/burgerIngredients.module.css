@@ -2,12 +2,25 @@
 .grid {
 display: flex;
 flex-direction: column;
-width: 600px;
-height: 912px;
+margin-top: 0;
+margin-bottom: 0;
 list-style-type: none;
 }
 
 .dragIcon {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+}
+
+.order {
+display: flex;
+justify-content:flex-end;
+align-items: center;
+}
+
+.largeIcon {
+  width: 33px;
+  height: 33px;
+  margin-left: 9.5px;
 }
