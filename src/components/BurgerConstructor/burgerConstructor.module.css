@@ -1,0 +1,35 @@
+
+.content {
+display: flex;
+flex-direction: column;
+max-width: 600px;
+width: 100%;
+}
+
+.gridCard {
+  display: grid;
+  grid-template-columns: repeat(2, 272px);
+  column-gap: 24px;
+  row-gap: 32px;
+  list-style-type: none;
+}
+
+.scrollBar {
+  overflow-y: scroll;
+  width: 100%;
+  height: 680px;
+  
+}
+
+.scrollBar::-webkit-scrollbar {
+    width: 8px; /* ширина для вертикального скролла */
+    background-color: #2F2F37;
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+    background-color:#8585AD;
+}
+
+.overflow {
+  min-height: 500px;
+}
