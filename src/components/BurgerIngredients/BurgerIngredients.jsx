@@ -1,57 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {ConstructorElement, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import ingredientsStyle from './burgerIngredients.module.css'; 
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import burgerStyles from './burgerIngredients.module.css';
+import NavigationBar from '../NavigationBar/NavigationBar';
+import BurgerCard from '../BurgerCard/BurgerCard';
 
 function BurgerIngredients(props) {
   return (
-    <>
-      <ul className={`${ingredientsStyle.grid} ml-10 pt-25 pl-4 pr-4`}>
-        <li className={`mb-4 ml-8`}>
-          <ConstructorElement 
-            type="top"
-            isLocked={true}
-            text={`${props.ingredient[0].name} (верх)`}
-            price={props.ingredient[0].price}
-            thumbnail={props.ingredient[0].image}
-          />
-        </li>  
-        <li className={`mb-4 ${ingredientsStyle.dragIcon}`}>
-          <DragIcon type="primary" />
-          <ConstructorElement
-            text={`${props.ingredient[1].name}`}
-            price={props.ingredient[1].price}
-            thumbnail={props.ingredient[1].image}
-          />
-        </li>
-        <li className={`ml-8 mb-10`}>
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={`${props.ingredient[0].name} (низ)`}
-            price={props.ingredient[0].price}
-            thumbnail={props.ingredient[0].image}
-          />
-        </li>
-        <li className={`${ingredientsStyle.order}`}>
-          <p className='text text_type_digits-medium'>{props.ingredient[0].price * 2 + props.ingredient[1].price}<span className={`${ingredientsStyle.largeIcon}`}><CurrencyIcon type="primary" /></span></p>
-          <div className='ml-10'>
-            <Button type="primary" size="large">Нажми на меня</Button>
-          </div>
-        </li>
-      </ul>
-      
-    </>
+    <div className={`${burgerStyles.content}`}>
+      <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
+      <NavigationBar />
+      <div className={burgerStyles.scrollBar}>
+        <div className={burgerStyles.overflow}>
+          <h2 id='buns' className='text text_type_main-medium'>Булки</h2>
+          <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
+            {props.ingredients.map((element) => {
+                if (element.type === "bun") return <BurgerCard burgerCard={element} key={element._id} /> 
+              })
+            }
+          </ul>
+          <h2 id='sauces' className='text text_type_main-medium'>Соусы</h2>
+          <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
+            {props.ingredients.map((element) => {
+                if (element.type === "sauce") return <BurgerCard burgerCard={element} key={element._id} /> 
+              })
+            }
+          </ul>
+          <h2 id='fillings' className='text text_type_main-medium'>Начинки</h2>
+          <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
+            {props.ingredients.map((element) => {
+                if (element.type === "main") return <BurgerCard burgerCard={element} key={element._id} /> 
+              })
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
   )
 }
 
 BurgerIngredients.propTypes = {
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
+  ingredients: PropTypes.arrayOf(PropTypes.object).isRequired
 }
-
 
 export default BurgerIngredients;
 

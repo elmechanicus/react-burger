@@ -1,47 +1,55 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import burgerStyles from './burgerConstructor.module.css';
-import NavigationBar from '../NavigationBar/NavigationBar';
-import BurgerCard from '../BurgerCard/BurgerCard';
+import {ConstructorElement, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+import ingredientsStyle from './burgerConstructor.module.css'; 
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function BurgerConctructor(props) {
+function BurgerConstructor(props) {
   return (
-    <div className={`${burgerStyles.content}`}>
-      <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
-      <NavigationBar />
-      <div className={burgerStyles.scrollBar}>
-        <div className={burgerStyles.overflow}>
-          <h2 id='buns' className='text text_type_main-medium'>Булки</h2>
-          <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
-            {props.card.map((element) => {
-                if (element.type === "bun") return <BurgerCard burgerCard={element} key={element._id} /> 
-              })
-            }
-          </ul>
-          <h2 id='sauces' className='text text_type_main-medium'>Соусы</h2>
-          <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
-            {props.card.map((element) => {
-                if (element.type === "sauce") return <BurgerCard burgerCard={element} key={element._id} /> 
-              })
-            }
-          </ul>
-          <h2 id='fillings' className='text text_type_main-medium'>Начинки</h2>
-          <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
-            {props.card.map((element) => {
-                if (element.type === "main") return <BurgerCard burgerCard={element} key={element._id} /> 
-              })
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
+    <>
+      <ul className={`${ingredientsStyle.grid} ml-10 pt-25 pl-4 pr-4`}>
+        <li className={`mb-4 ml-8`}>
+          <ConstructorElement 
+            type="top"
+            isLocked={true}
+            text={`${props.ingredients[0].name} (верх)`}
+            price={props.ingredients[0].price}
+            thumbnail={props.ingredients[0].image}
+          />
+        </li>  
+        <li className={`mb-4 ${ingredientsStyle.dragIcon}`}>
+          <DragIcon type="primary" />
+          <ConstructorElement
+            text={`${props.ingredients[1].name}`}
+            price={props.ingredients[1].price}
+            thumbnail={props.ingredients[1].image}
+          />
+        </li>
+        <li className={`ml-8 mb-10`}>
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={`${props.ingredients[0].name} (низ)`}
+            price={props.ingredients[0].price}
+            thumbnail={props.ingredients[0].image}
+          />
+        </li>
+        <li className={`${ingredientsStyle.order}`}>
+          <p className='text text_type_digits-medium'>{props.ingredients[0].price * 2 + props.ingredients[1].price}<span className={`${ingredientsStyle.largeIcon}`}><CurrencyIcon type="primary" /></span></p>
+          <div className='ml-10'>
+            <Button type="primary" size="large">Нажми на меня</Button>
+          </div>
+        </li>
+      </ul>
+      
+    </>
   )
 }
 
-BurgerConctructor.propTypes = {
-  type: PropTypes.string,
-  _id: PropTypes.string,
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
-export default BurgerConctructor;
+
+export default BurgerConstructor;
 
