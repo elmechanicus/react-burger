@@ -4,7 +4,6 @@ import styleApp from './app.module.css';
 import BurgerConstructor from '../BurgerIngredients/BurgerIngredients.jsx';
 import BurgerIngredients from '../BurgerConstructor/BurgerConstructor.jsx';
 import { dataArray } from '../../utils/data.jsx';
-import NavigationBar from '../NavigationBar/NavigationBar.jsx';
 
 function App() {
   const cardData = JSON.stringify(dataArray);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import burgerStyles from './burgerIngredients.module.css';
 import NavigationBar from '../NavigationBar/NavigationBar';
