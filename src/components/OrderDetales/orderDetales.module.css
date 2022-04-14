@@ -1,0 +1,15 @@
+.contentText {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+.checkMark {
+  display: flex;
+  width: 120px;
+  height: 120px;
+  justify-content: center;
+  align-items: center;
+  transform: scaleX(2) scaleY(2);
+}
