@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import contentStyles from './orderDetales.module.css';
 import {CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
-function OrderDetales(props) {
+function OrderDetales() {
   return (
     <div className={`${contentStyles.contentText} ml-25 mr-25 mt-30 mb-30`}>
       <h3 className="text text_type_digits-large">100500</h3>

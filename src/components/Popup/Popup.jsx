@@ -21,7 +21,7 @@ function Popup(props) {
       return ReactDOM.createPortal(
           <>
             <div className={`${popupStyle.popupContent}`}>
-              <button type="button" className={`${popupStyle.buttonStyle} mt-15 mr-10`}>
+              <button type="button" className={`${popupStyle.buttonStyle} mt-10 mr-10`}>
                 <CloseIcon type="primary" onClick={onCloseClick}/>
               </button>
               {children}

@@ -10,7 +10,7 @@
 .cardImage {
   display: flex;
   height: 120px;
-
+  cursor: pointer;
 }
 
 .cardTitle {

@@ -5,7 +5,8 @@ import ingredientsStyle from './burgerConstructor.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 function BurgerConstructor(props) {
-  const { ingredients, onOpenClick } = props;
+  const { ingredients, onOderClick} = props;
+  
   return (
     <>
       <ul className={`${ingredientsStyle.grid} ml-10 pt-25 pl-4 pr-4`}>
@@ -52,7 +53,7 @@ function BurgerConstructor(props) {
         <li className={`${ingredientsStyle.order}`}>
           <p className='text text_type_digits-medium'>{100500}<span className={`${ingredientsStyle.largeIcon}`}><CurrencyIcon type="primary" /></span></p>
           <div className='ml-10'>
-            <Button type="primary" size="large" onClick={onOpenClick}>Оформить заказ</Button>
+            <Button type="primary" size="large" onClick={onOderClick}>Оформить заказ</Button>
           </div>
         </li>
       </ul>

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { Children, useState } from 'react';
 import AppHeader from '../AppHeader/AppHeader.jsx';
 import styleApp from './app.module.css';
 import BurgerIngredients  from '../BurgerIngredients/BurgerIngredients.jsx';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor.jsx';
 import { getIngredients } from '../../utils/api.js';
 import Popup from '../Popup/Popup.jsx';
-import IngredientDetales from '../IngredientDetales/IngredientDetales.jsx';
+import IngredientDetails from '../IngredientDetales/IngredientDetails.jsx';
 import OrderDetales from '../OrderDetales/OrderDetales.jsx';
 
 function App() {                                                          
@@ -16,32 +16,48 @@ function App() {
       .catch((err) => console.log(err))
   }, []);
 
-  const [isPopupOpened, setIsPopupOpened] = useState(false);
-  const popupClose = () => { setIsPopupOpened(false) };
-  const popupOpen = () => { setIsPopupOpened(true) };
+  const [isPopupIngredientOpened, setIsPopupIngredientOpened] = useState(false);
+  const [isPopupOrderOpened, setIsPopupOrderOpen] = useState(false);
+  
+  const popupClose = () => {
+    setIsPopupIngredientOpened(false);
+    setIsPopupOrderOpen(false);
+  };
+  
   const handleEscClose = (evt) => {
     evt.key === "Escape" && popupClose();
   };
 
   const [clickedIngredient, setClickedIngredient] = useState({});
-  const handleIngredientClick = (ingredient) => {
+  
+  const popupContentIngredient = (ingredient) => {
     setClickedIngredient(ingredient);
-    popupOpen();
+    setIsPopupIngredientOpened(true);
   }
+  
+  const popupContentOrder = () => {
+    setIsPopupOrderOpen(true);
+  }
+  
 
   return (
     <>
       <div className={styleApp.appBackground}>
         <AppHeader />
         <div className={styleApp.appContent}>
-          <BurgerIngredients ingredients={ingredients} onClickIngredient={handleIngredientClick}/>
-          <BurgerConstructor ingredients={ingredients} onOpenClick={popupOpen} />
+          <BurgerIngredients ingredients={ingredients} onClickIngredient={popupContentIngredient}/>
+          <BurgerConstructor ingredients={ingredients} onOderClick={popupContentOrder}/>
         </div>
       </div>
-      {isPopupOpened &&
+      {isPopupIngredientOpened &&
         (<Popup onCloseClick={popupClose} onEscClose={handleEscClose}>
-        {/* <OrderDetales /> */}
-        <IngredientDetales />
+          <IngredientDetails ingredient={clickedIngredient}/>
+        </Popup>
+        )
+      };
+      {isPopupOrderOpened && (
+        <Popup onCloseClick={popupClose} onEscClose={handleEscClose}>
+          <OrderDetales/>
         </Popup>
         )
       };
