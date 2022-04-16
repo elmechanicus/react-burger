@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {ConstructorElement, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientsStyle from './burgerConstructor.module.css'; 
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import {objectIngredientPropTypes} from '../../utils/constants'
 
 function BurgerConstructor(props) {
   const { ingredients, onOderClick} = props;
@@ -63,7 +64,8 @@ function BurgerConstructor(props) {
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.object).isRequired
+  ingredients: PropTypes.arrayOf(objectIngredientPropTypes).isRequired,
+  onOderClick: PropTypes.func.isRequired
 }
 
 

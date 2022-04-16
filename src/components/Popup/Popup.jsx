@@ -31,7 +31,10 @@ function Popup(props) {
         );
   };                                      
 
-
-//Popup.propTypes = {}
+Popup.propTypes = {
+  onCloseClick: PropTypes.func.isRequired,
+  onEscClose: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired
+}
 
 export default Popup

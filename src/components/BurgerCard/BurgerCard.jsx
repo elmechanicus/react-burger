@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import cardStyle from './burgerCard.module.css';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-
+import {objectIngredientPropTypes} from '../../utils/constants'
 
 function BurgerCard(props) {
   const { burgerCard, onClickIngredient} = props;
@@ -23,7 +23,8 @@ function BurgerCard(props) {
 }
 
 BurgerCard.propTypes = {
-  burgerCard: PropTypes.object.isRequired
+  burgerCard: objectIngredientPropTypes,
+  onClickIngredient: PropTypes.func.isRequired
 }
 
 export default BurgerCard

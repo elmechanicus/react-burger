@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import burgerStyles from './burgerIngredients.module.css';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import BurgerCard from '../BurgerCard/BurgerCard';
+import {objectIngredientPropTypes} from '../../utils/constants'
 
 function BurgerIngredients(props) {
   const { ingredients, onClickIngredient } = props;
@@ -40,7 +41,8 @@ function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.object).isRequired
+  ingredients: PropTypes.arrayOf(objectIngredientPropTypes).isRequired,
+  onClickIngredient: PropTypes.func.isRequired
 }
 
 export default BurgerIngredients;
