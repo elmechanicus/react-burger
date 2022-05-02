@@ -3,58 +3,96 @@ import PropTypes from 'prop-types';
 import {ConstructorElement, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientsStyle from './burgerConstructor.module.css'; 
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import {objectIngredientPropTypes} from '../../utils/constants'
+import { IngredientsContext } from '../../utils/ingredientsContext';
 
-function BurgerConstructor(props) {
-  const { ingredients, onOderClick} = props;
-  
+function BurgerConstructor({ onOderClick }) {
+  const ingredients = React.useContext(IngredientsContext);
+  var summaryPrice = 0;
+
   return (
     <>
       <ul className={`${ingredientsStyle.grid} ml-10 pt-25 pl-4 pr-4`}>
         <li className={`mb-4 ml-8`}>
           {ingredients.map((item) => {
-            if (item._id === '60d3b41abdacab0026a733c6')
-            return <ConstructorElement 
-                    type="top"
-                    isLocked={true}
-                    text={`${item.name} (верх)`}
-                    price={item.price}
-                    thumbnail={item.image}
-                    key={item._id}
-                  />
+            if (item.type === 'bun' && item._id === '60d3b41abdacab0026a733c6') {
+              summaryPrice += item.price;
+              return <ConstructorElement
+                type="top"
+                isLocked={true}
+                text={`${item.name} (верх)`}
+                price={item.price}
+                thumbnail={item.image}
+                key={item._id}
+              />
+            }
           })}
-          
-        </li>  
+        </li>
+
         <li className={`mb-4 ${ingredientsStyle.dragIcon}`}>
           <DragIcon type="primary" />
           {ingredients.map((item) => {
-            if (item._id === '60d3b41abdacab0026a733c9')
+            if (item._id === '60d3b41abdacab0026a733cf') {
+              summaryPrice += item.price;
               return <ConstructorElement
-                      text={`${item.name}`}
-                      price={item.price}
-                      thumbnail={item.image}
-                      key={item._id}
-                    />
+                text={`${item.name}`}
+                price={item.price}
+                thumbnail={item.image}
+                key={item._id}
+              />
+            }
           })}
-          
         </li>
+
+        <li className={`mb-4 ${ingredientsStyle.dragIcon}`}>
+          <DragIcon type="primary" />
+          {ingredients.map((item) => {
+            if (item._id === '60d3b41abdacab0026a733d0') {
+              summaryPrice += item.price;
+              return <ConstructorElement
+                text={`${item.name}`}
+                price={item.price}
+                thumbnail={item.image}
+                key={item._id}
+              />
+            }
+          })}
+        </li>
+
+        <li className={`mb-4 ${ingredientsStyle.dragIcon}`}>
+          <DragIcon type="primary" />
+          {ingredients.map((item) => {
+            if (item._id === '60d3b41abdacab0026a733c9') {
+              summaryPrice += item.price;
+              return <ConstructorElement
+                text={`${item.name}`}
+                price={item.price}
+                thumbnail={item.image}
+                key={item._id}
+              />
+            }
+          })}
+        </li>
+
         <li className={`ml-8 mb-10`}>
           {ingredients.map((item) => {
-            if (item._id === '60d3b41abdacab0026a733c6')
-            return <ConstructorElement 
-                    type="bottom"
-                    isLocked={true}
-                    text={`${item.name} (низ)`}
-                    price={item.price}
-                    thumbnail={item.image}
-                    key={item._id}
-                  />
+            if (item.type === 'bun' && item._id === '60d3b41abdacab0026a733c6') {
+              summaryPrice += item.price;
+              return <ConstructorElement
+                type="bottom"
+                isLocked={true}
+                text={`${item.name} (низ)`}
+                price={item.price}
+                thumbnail={item.image}
+                key={item._id}
+              />
+            }
           })}
         </li>
         <li className={`${ingredientsStyle.order}`}>
-          <p className='text text_type_digits-medium'>{100500}<span className={`${ingredientsStyle.largeIcon}`}><CurrencyIcon type="primary" /></span></p>
+          <p className='text text_type_digits-medium'>{summaryPrice}<span className={`${ingredientsStyle.largeIcon}`}><CurrencyIcon type="primary" /></span></p>
           <div className='ml-10'>
-            <Button type="primary" size="large" onClick={onOderClick}>Оформить заказ</Button>
+            <Button type="primary" size="large" onClick={() => onOderClick(
+    ["60d3b41abdacab0026a733c6", "60d3b41abdacab0026a733cf", "60d3b41abdacab0026a733d0", "60d3b41abdacab0026a733c9"])}>Оформить заказ</Button>
           </div>
         </li>
       </ul>
@@ -64,7 +102,6 @@ function BurgerConstructor(props) {
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(objectIngredientPropTypes).isRequired,
   onOderClick: PropTypes.func.isRequired
 }
 

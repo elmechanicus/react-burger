@@ -4,9 +4,11 @@ import burgerStyles from './burgerIngredients.module.css';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import BurgerCard from '../BurgerCard/BurgerCard';
 import {objectIngredientPropTypes} from '../../utils/constants'
+import { IngredientsContext } from '../../utils/ingredientsContext';
 
-function BurgerIngredients(props) {
-  const { ingredients, onClickIngredient } = props;
+function BurgerIngredients({onClickIngredient}) {
+  const ingredients = React.useContext(IngredientsContext);
+
   return (
     <div className={`${burgerStyles.content}`}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
@@ -41,7 +43,6 @@ function BurgerIngredients(props) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(objectIngredientPropTypes).isRequired,
   onClickIngredient: PropTypes.func.isRequired
 }
 
