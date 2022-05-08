@@ -23,6 +23,7 @@ function App() {
   
   const popupClose = () => {
     setIsPopupIngredientOpened(false);
+    setOrderNumber(null);
     setIsPopupOrderOpen(false);
   };
   
