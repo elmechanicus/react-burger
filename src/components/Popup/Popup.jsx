@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import PropTypes from 'prop-types';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import popupStyle from './popup.module.css';
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const popupWindow = document.querySelector("#modals");

@@ -82,7 +82,11 @@ function BurgerConstructor({ onOderClick }) {
           })}
         </li>
         <li className={`${ingredientsStyle.order}`}>
-          <p className='text text_type_digits-medium'>{summaryPrice}<span className={`${ingredientsStyle.largeIcon}`}><CurrencyIcon type="primary" /></span></p>
+          <p className='text text_type_digits-medium'>{summaryPrice}
+            <span className={`${ingredientsStyle.largeIcon}`}>
+              <CurrencyIcon type="primary" />
+            </span>
+          </p>
           <div className='ml-10'>
             <Button type="primary" size="large" onClick={() => onOderClick(itemIds)}>Оформить заказ</Button>
           </div>
