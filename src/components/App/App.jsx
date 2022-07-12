@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppHeader from '../AppHeader/AppHeader.jsx';
 import styleApp from './app.module.css';
 import BurgerIngredients  from '../BurgerIngredients/BurgerIngredients.jsx';
@@ -12,7 +12,7 @@ import OrderDetales from '../OrderDetales/OrderDetales.jsx';
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
-  React.useEffect(() => {//данные прилетают с сервера в момент монтирования
+  useEffect(() => {//данные прилетают с сервера в момент монтирования
     getIngredients()
       .then((res) => setIngredients(res.data))
       .catch((err) => console.log(err))
