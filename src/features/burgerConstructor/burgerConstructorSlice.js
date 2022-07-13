@@ -9,7 +9,7 @@ export const burgerConstructorSlice = createSlice({
   initialState,
   reducers: {
     addIngredient: (state, action) => {
-      state.selectedIngredients.push(action.payload)
+      state.selectedIngredients.push(action.payload.id)
     },
   },
 })
