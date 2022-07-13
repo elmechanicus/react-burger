@@ -5,5 +5,9 @@ const initialState = {
 }
 
 export const burgerIngredientsSlice = createSlice({
-  
+  name: 'burgerIngredients',
+  initialState,
+  reducers: {
+    
+  }
 })

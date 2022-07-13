@@ -5,5 +5,9 @@ const initialState = {
 }
 
 export const ingredientsDetailsSlice = createSlice({
-  
+  name: 'ingredientsDetails',
+  initialState,
+  reducers: {
+    
+  }
 })

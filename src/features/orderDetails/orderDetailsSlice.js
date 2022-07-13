@@ -5,5 +5,9 @@ const initialState = {
 }
 
 export const orderDetailsSlice = createSlice({
-  
+  name: 'orderDetails',
+  initialState,
+  reducers: {
+    
+  }
 })
