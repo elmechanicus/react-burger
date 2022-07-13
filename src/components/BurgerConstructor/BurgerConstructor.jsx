@@ -4,16 +4,17 @@ import {ConstructorElement, DragIcon, CurrencyIcon} from '@ya.praktikum/react-de
 import ingredientsStyle from './burgerConstructor.module.css'; 
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientsContext } from '../../utils/ingredientsContext';
+import { useSelector } from 'react-redux';
 
 
 function BurgerConstructor({ onOderClick }) {
   const ingredients = React.useContext(IngredientsContext);
-  const itemIds = ["60d3b41abdacab0026a733c6", "60d3b41abdacab0026a733d1", "60d3b41abdacab0026a733cf", "60d3b41abdacab0026a733d3", "60d3b41abdacab0026a733c9"]; //Пока эти данные будут захардкожены
+  const itemIds = useSelector(state => state.burgerConstructor.selectedIngredients); //Пока эти данные будут захардкожены
   
   //отфильтруем массив объектов по массиву id-шников
   const ingredientsConstructor = ingredients.filter(ingredient => {
     for (let i = 0; i < itemIds.length; i++) {
-      if (ingredient._id === itemIds[i]) { return ingredient }
+      if (ingredient._id === itemIds[i]) return ingredient
     }
   })
   

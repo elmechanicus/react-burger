@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import cardStyle from './burgerCard.module.css';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import {objectIngredientPropTypes} from '../../utils/constants'
+import { objectIngredientPropTypes } from '../../utils/constants';
+import { useDispatch } from 'react-redux';
+import { addIngredient } from '../../features/burgerConstructor/burgerConstructorSlice';
+
 
 function BurgerCard(props) {
+  const dispatch = useDispatch();
+  
   const { burgerCard, onClickIngredient} = props;
   return (
     <li className={`${cardStyle.cardSize}`}>
