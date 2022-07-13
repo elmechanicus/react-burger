@@ -25,7 +25,7 @@ function BurgerConstructor({ onOderClick }) {
   //получим суммарный чек
   const summaryPrice = burgerConstructorPrice.reduce((price, currentPrice) => {
     return price + currentPrice
-  }, 0) + burgerConstructorPrice[0];
+  }, 0);
 
   return (
     <>
