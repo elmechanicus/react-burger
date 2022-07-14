@@ -4,13 +4,20 @@ import {ConstructorElement, DragIcon, CurrencyIcon} from '@ya.praktikum/react-de
 import ingredientsStyle from './burgerConstructor.module.css'; 
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientsContext } from '../../utils/ingredientsContext';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeIngredient } from '../../features/burgerConstructor/burgerConstructorSlice';
+
 
 
 function BurgerConstructor({ onOderClick }) {
   const ingredients = React.useContext(IngredientsContext);
+  const dispatch = useDispatch();
   const itemIds = useSelector(state => state.burgerConstructor.selectedIngredients); //Пока эти данные будут захардкожены
   
+  const removeIngredientHandler = (id) => {
+    dispatch(removeIngredient(id));
+  }
+
   //отфильтруем массив объектов по массиву id-шников
   const ingredientsConstructor = ingredients.filter(ingredient => {
     for (let i = 0; i < itemIds.length; i++) {
@@ -34,7 +41,6 @@ function BurgerConstructor({ onOderClick }) {
         <li className={`mb-4 ml-8`}>
           {ingredients.map((item) => {
             if (item.type === 'bun' && item._id === itemIds[0]) {
-              
               return <ConstructorElement
                 type="top"
                 isLocked={true}
@@ -55,10 +61,11 @@ function BurgerConstructor({ onOderClick }) {
                   return <div className={`mb-4 ${ingredientsStyle.gridDragIcon}`} key={`nobun${item._id}`}>
                     <DragIcon type="primary" />
                     <ConstructorElement
-                    text={item.name}
-                    price={item.price}
-                    thumbnail={item.image}
-                    key={item._id}
+                      handleClose={()=>removeIngredientHandler(item._id)}
+                      text={item.name}
+                      price={item.price}
+                      thumbnail={item.image}
+                      key={item._id}
                     />
                   </div>
                 }

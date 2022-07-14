@@ -9,10 +9,13 @@ export const burgerConstructorSlice = createSlice({
   initialState,
   reducers: {
     addIngredient: (state, action) => {
-      state.selectedIngredients.push(action.payload.id)
+      state.selectedIngredients.push(action.payload)
     },
+    removeIngredient: (state, action) => {
+      state.selectedIngredients = state.selectedIngredients.filter((ingredientId) => ingredientId !== action.payload)
+    }
   },
 })
 
-export const { addIngredient } = burgerConstructorSlice.actions
+export const { addIngredient, removeIngredient } = burgerConstructorSlice.actions
 export default burgerConstructorSlice.reducer

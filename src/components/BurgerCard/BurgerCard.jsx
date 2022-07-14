@@ -11,11 +11,8 @@ import { addIngredient } from '../../features/burgerConstructor/burgerConstructo
 function BurgerCard(props) {
   const dispatch = useDispatch();
   
-  const addIngredientHandler = () => {
-    const ingredient = {
-      id: burgerCard._id,
-    }
-    dispatch(addIngredient(ingredient));
+  const addIngredientHandler = (id) => {
+    dispatch(addIngredient(id));
   }
   
   const { burgerCard, onClickIngredient } = props;
@@ -29,7 +26,7 @@ function BurgerCard(props) {
         <CurrencyIcon type="primary" />
       </div>
       <div className={`${cardStyle.cardTitle}`}>
-        <p className={`text text_type_main-default ${cardStyle.cardTitleText}`} onClick={() => addIngredientHandler()}>{burgerCard.name}</p>
+        <p className={`text text_type_main-default ${cardStyle.cardTitleText}`} onClick={() => addIngredientHandler(burgerCard._id)}>{burgerCard.name}</p>
       </div>
     </li>
   )
