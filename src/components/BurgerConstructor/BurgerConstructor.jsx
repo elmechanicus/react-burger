@@ -37,8 +37,8 @@ function BurgerConstructor({ onOderClick }) {
 
   return (
     <>
-      <ul className={`${ingredientsStyle.grid} ml-10 pt-25 pl-4 pr-4`}>
-        <li className={`mb-4 ml-8`}>
+      <ul className={`${ingredientsStyle.grid} ml-10 pt-25 pl-4`}>
+        <li className={`mb-4 ml-8 pr-4`}>
           {ingredients.map((item) => {
             if (item.type === 'bun' && item._id === itemIds[0]) {
               return <ConstructorElement
@@ -54,27 +54,31 @@ function BurgerConstructor({ onOderClick }) {
         </li>
 
         <li className={`${ingredientsStyle.dragIcon}`}>
-          {
-            ingredients.map((item) => {
-              for (let i = 1; i < itemIds.length; i++) {
-                if (item._id === itemIds[i]) {
-                  return <div className={`mb-4 ${ingredientsStyle.gridDragIcon}`} key={`nobun${item._id}`}>
-                    <DragIcon type="primary" />
-                    <ConstructorElement
-                      handleClose={()=>removeIngredientHandler(item._id)}
-                      text={item.name}
-                      price={item.price}
-                      thumbnail={item.image}
-                      key={item._id}
-                    />
-                  </div>
+          <div className={`${ingredientsStyle.overflow}`}>
+            <div className='pr-2'>
+              {
+              ingredients.map((item) => {
+                for (let i = 1; i < itemIds.length; i++) {
+                  if (item._id === itemIds[i]) {
+                    return <div className={`mb-4 ${ingredientsStyle.gridDragIcon}`} key={`nobun${item._id}`}>
+                            <DragIcon type="primary" />
+                            <ConstructorElement
+                              handleClose={()=>removeIngredientHandler(item._id)}
+                              text={item.name}
+                              price={item.price}
+                              thumbnail={item.image}
+                              key={item._id}
+                      />
+                    </div>
+                  }
                 }
+              })
               }
-            })
-          }
+            </div>
+          </div>
         </li>
 
-        <li className={`ml-8 mb-10`}>
+        <li className={`ml-8 mb-10 mt-4 pr-4`}>
           {ingredients.map((item) => {
             if (item.type === 'bun' && item._id === itemIds[0]) {
               
