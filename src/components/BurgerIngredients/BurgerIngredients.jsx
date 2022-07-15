@@ -10,10 +10,10 @@ function BurgerIngredients({onClickIngredient}) {
   const ingredients = React.useContext(IngredientsContext);
 
   return (
-    <div className={`${burgerStyles.content}`}>
+    <div className={burgerStyles.content}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <NavigationBar />
-      <div className={burgerStyles.scrollBar}>
+      <div className={`${burgerStyles.scrollBar} mt-10`}>
         <div className={burgerStyles.overflow}>
           <h2 id='buns' className='text text_type_main-medium'>Булки</h2>
           <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
