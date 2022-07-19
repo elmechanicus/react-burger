@@ -10,7 +10,8 @@ import Popup from '../Popup/Popup.jsx';
 import IngredientDetails from '../IngredientDetales/IngredientDetails.jsx';
 import OrderDetales from '../OrderDetales/OrderDetales.jsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { closePopup } from '../../features/popup/popupSlice';
+import { closePopup, closePopupOrder, openPopupOrder } from '../../features/popup/popupSlice';
+import { viewIngredientDetails } from '../../features/ingredientsDetails/ingredientsDetailsSlice';
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -22,14 +23,15 @@ function App() {
 
   const dispatch = useDispatch();
   
-  const isPopup = useSelector(state => state.popup.isPopupOpened);
+  const isPopup = useSelector(state => state.popup.popupIngredient.isPopupOpened);
 
-  const [isPopupOrderOpened, setIsPopupOrderOpen] = useState(false);
+  const isPopupOrder = useSelector(state => state.popup.popupOrder.isPopupOpened);
   
   const popupClose = () => {
+    dispatch(viewIngredientDetails({}));
     dispatch(closePopup(false));
     setOrderNumber(null);
-    setIsPopupOrderOpen(false);
+    dispatch(closePopupOrder(false));
   };
   
   const handleEscClose = (evt) => {
@@ -42,7 +44,7 @@ function App() {
     getNumberOrder({"ingredients": ingredientsList})
       .then(res => setOrderNumber(res.order.number))
       .catch(err => console.log(err))
-    setIsPopupOrderOpen(true);
+    dispatch(openPopupOrder(true));
   }
   
 
@@ -53,7 +55,7 @@ function App() {
         <div className={styleApp.appContent}>
           <IngredientsContext.Provider value={ingredients}>
             <BurgerIngredients />
-            <BurgerConstructor onOderClick={popupContentOrder}/>
+            <BurgerConstructor onOrderClick={popupContentOrder}/>
           </IngredientsContext.Provider>
         </div>
       </div>
@@ -63,8 +65,8 @@ function App() {
         </Popup>
         )
       };
-      {isPopupOrderOpened && (
-        <Popup onCloseClick={popupClose} onEscClose={handleEscClose}>
+      {isPopupOrder && (
+        <Popup onEscClose={handleEscClose}>
           <OrderNumberContext.Provider value={orderNumber}>
             <OrderDetales />
           </OrderNumberContext.Provider>

@@ -9,7 +9,7 @@ import { removeIngredient } from '../../features/burgerConstructor/burgerConstru
 
 
 
-function BurgerConstructor({ onOderClick }) {
+function BurgerConstructor({ onOrderClick }) {
   const ingredients = React.useContext(IngredientsContext);
   const dispatch = useDispatch();
   const itemIds = useSelector(state => state.burgerConstructor.selectedIngredients); //Пока эти данные будут захардкожены
@@ -100,7 +100,7 @@ function BurgerConstructor({ onOderClick }) {
             </span>
           </p>
           <div className='ml-10'>
-            <Button type="primary" size="large" onClick={() => onOderClick(itemIds)}>Оформить заказ</Button>
+            <Button type="primary" size="large" onClick={() => onOrderClick(itemIds)}>Оформить заказ</Button>
           </div>
         </li>
       </ul>
@@ -110,7 +110,7 @@ function BurgerConstructor({ onOderClick }) {
 }
 
 BurgerConstructor.propTypes = {
-  onOderClick: PropTypes.func.isRequired
+  onOrderClick: PropTypes.func.isRequired
 }
 
 

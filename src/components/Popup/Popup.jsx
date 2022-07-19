@@ -5,14 +5,15 @@ import popupStyle from './popup.module.css';
 import { useEffect } from "react";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import { useDispatch } from "react-redux";
-import { closePopup } from "../../features/popup/popupSlice";
+import { viewIngredientDetails } from '../../features/ingredientsDetails/ingredientsDetailsSlice';
+import { closePopup, closePopupOrder } from "../../features/popup/popupSlice";
+
 
 const popupWindow = document.querySelector("#modals");
 
 function Popup(props) {
   const { onEscClose, children } = props;
   const dispatch = useDispatch();
-  
   useEffect(() => {
     document.addEventListener("keydown", onEscClose);
 
@@ -20,12 +21,18 @@ function Popup(props) {
       document.removeEventListener("keydown", onEscClose);
     };
   }, []);
+
+  function closeAllModals() {
+    dispatch(viewIngredientDetails({}));
+    dispatch(closePopup(false));
+    dispatch(closePopupOrder(false));
+}
   
       return ReactDOM.createPortal(
           <>
             <div className={`${popupStyle.popupContent}`}>
               <button type="button" className={`${popupStyle.buttonStyle} mt-10 mr-10`}>
-              <CloseIcon type="primary" onClick={() => dispatch(closePopup(false))} />
+              <CloseIcon type="primary" onClick={closeAllModals} />
               </button>
               {children}
             </div>

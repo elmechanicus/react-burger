@@ -1,3 +1,5 @@
+
+
 //проверим результат запроса
 export function checkResult(result) {
 if (result.ok) {
