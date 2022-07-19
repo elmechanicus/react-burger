@@ -9,6 +9,8 @@ import { OrderNumberContext } from '../../utils/orderContext.js';
 import Popup from '../Popup/Popup.jsx';
 import IngredientDetails from '../IngredientDetales/IngredientDetails.jsx';
 import OrderDetales from '../OrderDetales/OrderDetales.jsx';
+import { useSelector, useDispatch } from 'react-redux';
+import { closePopup } from '../../features/popup/popupSlice';
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -17,12 +19,15 @@ function App() {
       .then((res) => setIngredients(res.data))
       .catch((err) => console.log(err))
   }, []);
+
+  const dispatch = useDispatch();
   
-  const [isPopupIngredientOpened, setIsPopupIngredientOpened] = useState(false);
+  const isPopup = useSelector(state => state.popup.isPopupOpened);
+
   const [isPopupOrderOpened, setIsPopupOrderOpen] = useState(false);
   
   const popupClose = () => {
-    setIsPopupIngredientOpened(false);
+    dispatch(closePopup(false));
     setOrderNumber(null);
     setIsPopupOrderOpen(false);
   };
@@ -30,13 +35,6 @@ function App() {
   const handleEscClose = (evt) => {
     evt.key === "Escape" && popupClose();
   };
-
-  const [clickedIngredient, setClickedIngredient] = useState({});
-  
-  const popupContentIngredient = (ingredient) => {
-    setClickedIngredient(ingredient);
-    setIsPopupIngredientOpened(true);
-  }
   
   const [orderNumber, setOrderNumber] = useState()
 
@@ -54,14 +52,14 @@ function App() {
         <AppHeader />
         <div className={styleApp.appContent}>
           <IngredientsContext.Provider value={ingredients}>
-            <BurgerIngredients onClickIngredient={popupContentIngredient}/>
+            <BurgerIngredients />
             <BurgerConstructor onOderClick={popupContentOrder}/>
           </IngredientsContext.Provider>
         </div>
       </div>
-      {isPopupIngredientOpened &&
-        (<Popup onCloseClick={popupClose} onEscClose={handleEscClose}>
-          <IngredientDetails ingredient={clickedIngredient}/>
+      {isPopup &&
+        (<Popup onEscClose={handleEscClose}>
+          <IngredientDetails />
         </Popup>
         )
       };

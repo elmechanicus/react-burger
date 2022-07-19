@@ -4,11 +4,14 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import popupStyle from './popup.module.css';
 import { useEffect } from "react";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import { useDispatch } from "react-redux";
+import { closePopup } from "../../features/popup/popupSlice";
 
 const popupWindow = document.querySelector("#modals");
 
 function Popup(props) {
-  const { onCloseClick, onEscClose, children } = props;
+  const { onEscClose, children } = props;
+  const dispatch = useDispatch();
   
   useEffect(() => {
     document.addEventListener("keydown", onEscClose);
@@ -22,17 +25,16 @@ function Popup(props) {
           <>
             <div className={`${popupStyle.popupContent}`}>
               <button type="button" className={`${popupStyle.buttonStyle} mt-10 mr-10`}>
-                <CloseIcon type="primary" onClick={onCloseClick}/>
+              <CloseIcon type="primary" onClick={() => dispatch(closePopup(false))} />
               </button>
               {children}
             </div>
-            <ModalOverlay onCloseClick={onCloseClick}/>
+            <ModalOverlay />
           </>, popupWindow
         );
   };                                      
 
 Popup.propTypes = {
-  onCloseClick: PropTypes.func.isRequired,
   onEscClose: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired
 }

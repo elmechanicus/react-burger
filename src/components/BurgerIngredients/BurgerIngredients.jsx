@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import burgerStyles from './burgerIngredients.module.css';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import BurgerCard from '../BurgerCard/BurgerCard';
-import {objectIngredientPropTypes} from '../../utils/constants'
 import { IngredientsContext } from '../../utils/ingredientsContext';
 
-function BurgerIngredients({onClickIngredient}) {
+
+function BurgerIngredients() {
   const ingredients = React.useContext(IngredientsContext);
 
   return (
@@ -18,21 +17,21 @@ function BurgerIngredients({onClickIngredient}) {
           <h2 id='buns' className='text text_type_main-medium'>Булки</h2>
           <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
             {ingredients.map((element) => {
-              if (element.type === "bun") return <BurgerCard burgerCard={element} key={element._id} onClickIngredient={onClickIngredient}/> 
+              if (element.type === "bun") return <BurgerCard burgerCard={element} key={element._id} /> 
               })
             }
           </ul>
           <h2 id='sauces' className='text text_type_main-medium'>Соусы</h2>
           <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
             {ingredients.map((element) => {
-                if (element.type === "sauce") return <BurgerCard burgerCard={element} key={element._id} onClickIngredient={onClickIngredient}/> 
+                if (element.type === "sauce") return <BurgerCard burgerCard={element} key={element._id} /> 
               })
             }
           </ul>
           <h2 id='fillings' className='text text_type_main-medium'>Начинки</h2>
           <ul className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
             {ingredients.map((element) => {
-                if (element.type === "main") return <BurgerCard burgerCard={element} key={element._id} onClickIngredient={onClickIngredient}/> 
+                if (element.type === "main") return <BurgerCard burgerCard={element} key={element._id} /> 
               })
             }
           </ul>
@@ -42,9 +41,7 @@ function BurgerIngredients({onClickIngredient}) {
   )
 }
 
-BurgerIngredients.propTypes = {
-  onClickIngredient: PropTypes.func.isRequired
-}
+
 
 export default BurgerIngredients;
 

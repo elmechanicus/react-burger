@@ -1,15 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import overlayStyle from './modalOverlay.module.css';
+import { useDispatch } from 'react-redux';
+import { closePopup } from '../../features/popup/popupSlice';
 
-function ModalOverlay({onCloseClick}) {
+function ModalOverlay() {
+  const dispatch = useDispatch();
+
   return (
-    <div className={overlayStyle.popupBackground} onClick={onCloseClick}></div>
+    <div className={overlayStyle.popupBackground} onClick={()=>dispatch(closePopup(false))}></div>
   )
 }
 
-ModalOverlay.propTypes = {
-  onCloseClick: PropTypes.func.isRequired
-}
 
 export default ModalOverlay
