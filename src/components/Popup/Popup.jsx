@@ -19,8 +19,8 @@ function Popup(props) {
 
     return () => {
       document.removeEventListener("keydown", onEscClose);
-    };
-  }, []);
+    }
+  }, [onEscClose]);
 
   function closeAllModals() {
     dispatch(viewIngredientDetails({}));

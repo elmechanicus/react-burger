@@ -64,7 +64,7 @@ function App() {
           <IngredientDetails />
         </Popup>
         )
-      };
+      }
       {isPopupOrder && (
         <Popup onEscClose={handleEscClose}>
           <OrderNumberContext.Provider value={orderNumber}>
@@ -72,7 +72,7 @@ function App() {
           </OrderNumberContext.Provider>
         </Popup>
         )
-      };
+      }
       
     </>
     

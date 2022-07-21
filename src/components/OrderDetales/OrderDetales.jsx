@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import contentStyles from './orderDetales.module.css';
 import {CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { OrderNumberContext } from '../../utils/orderContext';
@@ -19,7 +18,6 @@ function OrderDetales() {
   )
 }
 
-// OrderDetales.propTypes = {}
 
 export default OrderDetales
 
