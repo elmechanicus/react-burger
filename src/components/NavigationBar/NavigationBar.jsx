@@ -3,8 +3,8 @@ import navigationStyle from './navigationBar.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
-const NavigationBar = () => {
-  const [current, setCurrent] = useState('Булки')
+const NavigationBar = (props) => {
+  const { current, setCurrent } = props;
   return (
     <div className={`${navigationStyle.navigation}`}>
       <a href='#buns' className={`${navigationStyle.links}`}>
