@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import navigationStyle from './navigationBar.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
