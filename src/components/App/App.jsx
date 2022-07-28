@@ -11,15 +11,11 @@ import OrderDetales from '../OrderDetales/OrderDetales.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { closePopup, closePopupOrder, openPopupOrder } from '../../features/popup/popupSlice';
 import { viewIngredientDetails } from '../../features/ingredientsDetails/ingredientsDetailsSlice';
-import { fetchIngredients } from '../../features/burgerIngredients/burgerIngredientsSlice.js';
+
 
 
 function App() {
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(fetchIngredients());
-  })
 
   const isPopup = useSelector(state => state.popup.popupIngredient.isPopupOpened);
 
@@ -38,8 +34,8 @@ function App() {
   
   const [orderNumber, setOrderNumber] = useState()
 
-  const popupContentOrder = (ingredientsList) => {
-    getNumberOrder({"ingredients": ingredientsList})
+  const popupContentOrder = (ingredientsListIds) => {
+    getNumberOrder({"ingredients": ingredientsListIds})
       .then(res => setOrderNumber(res.order.number))
       .catch(err => console.log(err))
     dispatch(openPopupOrder(true));

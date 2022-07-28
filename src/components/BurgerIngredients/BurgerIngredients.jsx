@@ -1,14 +1,20 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import burgerStyles from './burgerIngredients.module.css';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import BurgerCard from '../BurgerCard/BurgerCard';
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import { useInView } from 'react-intersection-observer';
-
+import { fetchIngredients } from '../../features/burgerIngredients/burgerIngredientsSlice.js';
 
 
 function BurgerIngredients() {
+  const dispatch = useDispatch();
   const ingredients = useSelector(state => state.burgerIngredients.ingredients);
+
+  useEffect(() => {
+    dispatch(fetchIngredients());
+  }, [dispatch])
+
   const [current, setCurrent] = useState('Булки');
 
   const { ref: fillingsRef, inView: fillingsInView } = useInView({
