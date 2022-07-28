@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import {ConstructorElement, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientsStyle from './burgerConstructor.module.css'; 
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { IngredientsContext } from '../../utils/ingredientsContext';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeIngredient } from '../../features/burgerConstructor/burgerConstructorSlice';
 
 
 
 function BurgerConstructor({ onOrderClick }) {
-  const ingredients = React.useContext(IngredientsContext);
+  const ingredients = useSelector(state => state.burgerIngredients.ingredients);
   const dispatch = useDispatch();
   const itemIds = useSelector(state => state.burgerConstructor.selectedIngredients); //Пока эти данные будут захардкожены
   

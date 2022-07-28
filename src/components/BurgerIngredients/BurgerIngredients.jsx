@@ -1,16 +1,15 @@
-import React from 'react';
+import {useState} from 'react';
 import burgerStyles from './burgerIngredients.module.css';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import BurgerCard from '../BurgerCard/BurgerCard';
-import { IngredientsContext } from '../../utils/ingredientsContext';
+import { useSelector} from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 
 
 
-
 function BurgerIngredients() {
-  const ingredients = React.useContext(IngredientsContext);
-  const [current, setCurrent] = React.useState('Булки');
+  const ingredients = useSelector(state => state.burgerIngredients.ingredients);
+  const [current, setCurrent] = useState('Булки');
 
   const { ref: fillingsRef, inView: fillingsInView } = useInView({
     threshold: 0.52,
