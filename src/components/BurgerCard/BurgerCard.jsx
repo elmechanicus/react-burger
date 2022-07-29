@@ -16,8 +16,9 @@ function BurgerCard(props) {
   }
 
   const onClickIngredient = (burgerCard) => {
-    dispatch(viewIngredientDetails(burgerCard));
-    dispatch(openPopup(true));
+    dispatch(viewIngredientDetails({}));//очищаем данные
+    dispatch(viewIngredientDetails(burgerCard));//запихиваем новые данные
+    dispatch(openPopup(true));//открываем попап
   }
 
   

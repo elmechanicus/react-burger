@@ -1,20 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import {ConstructorElement, DragIcon, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientsStyle from './burgerConstructor.module.css'; 
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeIngredient } from '../../features/burgerConstructor/burgerConstructorSlice';
+import { getOrderNumber, setOrderNumber } from '../../features/orderDetails/orderDetailsSlice';
+import { openPopupOrder } from '../../features/popup/popupSlice';
 
 
 
-function BurgerConstructor({ onOrderClick }) {
-  const ingredients = useSelector(state => state.burgerIngredients.ingredients);
+function BurgerConstructor() {
   const dispatch = useDispatch();
+  
+  const ingredients = useSelector(state => state.burgerIngredients.ingredients);
+  
   const itemIds = useSelector(state => state.burgerConstructor.selectedIngredients); //Пока эти данные будут захардкожены
   
   const removeIngredientHandler = (id) => {
     dispatch(removeIngredient(id));
+  }
+
+  const popupContentOrder = (ingredientsListIds) => {
+    dispatch(setOrderNumber(null));//очищаем номер заказа
+    dispatch(getOrderNumber(ingredientsListIds));//получаем новый номер
+    dispatch(openPopupOrder(true));//открываем попап
   }
 
   //отфильтруем массив объектов по массиву id-шников
@@ -99,17 +107,13 @@ function BurgerConstructor({ onOrderClick }) {
             </span>
           </p>
           <div className='ml-10'>
-            <Button type="primary" size="large" onClick={() => onOrderClick(itemIds)}>Оформить заказ</Button>
+            <Button type="primary" size="large" onClick={() => popupContentOrder(itemIds)}>Оформить заказ</Button>
           </div>
         </li>
       </ul>
       
     </>
   )
-}
-
-BurgerConstructor.propTypes = {
-  onOrderClick: PropTypes.func.isRequired
 }
 
 

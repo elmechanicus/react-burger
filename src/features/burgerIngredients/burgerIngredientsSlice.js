@@ -18,7 +18,8 @@ export const fetchIngredients = createAsyncThunk(
       if (!response.ok) { throw new Error(`Упс! Что-то пошло не так... ошибка: ${response.status}`); }
         const data = await response.json();
         return dispatch(setIngredients(data));
-    } catch (error){
+    }
+    catch (error) {
       return rejectWithValue(error.message);
     }
     

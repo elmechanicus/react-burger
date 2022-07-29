@@ -1,10 +1,9 @@
-import React from 'react';
+import { useSelector } from 'react-redux';
 import contentStyles from './orderDetales.module.css';
 import {CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import { OrderNumberContext } from '../../utils/orderContext';
 
 function OrderDetales() {
-  const orderNumber = React.useContext(OrderNumberContext);
+  const orderNumber = useSelector(state => state.orderDetails.orderNumber);
 
   return (
     <div className={`${contentStyles.contentText} ml-25 mr-25 mt-30 mb-30`}>
