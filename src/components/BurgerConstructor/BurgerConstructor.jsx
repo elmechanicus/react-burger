@@ -11,10 +11,8 @@ import { openPopupOrder } from '../../features/popup/popupSlice';
 function BurgerConstructor() {
   const dispatch = useDispatch();
   
-  const ingredients = useSelector(state => state.burgerIngredients.ingredients);
-  
-  const itemIds = useSelector(state => state.burgerConstructor.selectedIngredients); //Пока эти данные будут захардкожены
-  
+  const ingredientsConstructor = useSelector(state => state.burgerConstructor.selectedIngredients);
+
   const removeIngredientHandler = (id) => {
     dispatch(removeIngredient(id));
   }
@@ -25,12 +23,6 @@ function BurgerConstructor() {
     dispatch(openPopupOrder(true));//открываем попап
   }
 
-  //отфильтруем массив объектов по массиву id-шников
-  const ingredientsConstructor = ingredients.filter(ingredient => {
-    for (let i = 0; i < itemIds.length; i++) {
-      if (ingredient._id === itemIds[i]) return ingredient
-    }
-  })
   
   //соберём все цены ингредиентов в одном массиве
   const burgerConstructorPrice = ingredientsConstructor.map(item => {
@@ -46,15 +38,15 @@ function BurgerConstructor() {
     <>
       <ul className={`${ingredientsStyle.grid} ml-10 pt-25 pl-4`}>
         <li className={`mb-4 ml-8 pr-4`}>
-          {ingredients.map((item) => {
-            if (item.type === 'bun' && item._id === itemIds[0]) {
+          {ingredientsConstructor.map((item) => {
+            if (item.type === 'bun') {
               return <ConstructorElement
                 type="top"
                 isLocked={true}
                 text={`${item.name} (верх)`}
                 price={item.price}
                 thumbnail={item.image}
-                key={item._id}
+                key={item.constructorId}
               />
             }
           })}
@@ -63,39 +55,36 @@ function BurgerConstructor() {
         <li className={`${ingredientsStyle.dragIcon}`}>
           <div className={`${ingredientsStyle.overflow}`}>
             <div className='pr-2'>
-              {
-              ingredients.map((item) => {
-                for (let i = 1; i < itemIds.length; i++) {
-                  if (item._id === itemIds[i]) {
-                    return <div className={`mb-4 ${ingredientsStyle.gridDragIcon}`} key={`nobun${item._id}`}>
-                            <DragIcon type="primary" />
+              {ingredientsConstructor.map((item) => {
+                for (let i = 0; i < ingredientsConstructor.length; i++) {
+                  if (item.type !== 'bun') {
+                    return <div className={`mb-4 ${ingredientsStyle.gridDragIcon}`} key={item.constructorId}>                        <DragIcon type="primary" />
                             <ConstructorElement
-                              handleClose={()=>removeIngredientHandler(item._id)}
+                              handleClose={()=>removeIngredientHandler(item.constructorId)}
                               text={item.name}
                               price={item.price}
                               thumbnail={item.image}
-                              key={item._id}
-                      />
-                    </div>
+                              key={item.constructorId}
+                              />
+                          </div>
+                    }
                   }
-                }
-              })
+                })
               }
             </div>
           </div>
         </li>
 
         <li className={`ml-8 mb-10 mt-4 pr-4`}>
-          {ingredients.map((item) => {
-            if (item.type === 'bun' && item._id === itemIds[0]) {
-              
+          {ingredientsConstructor.map((item) => {
+            if (item.type === 'bun') {
               return <ConstructorElement
                 type="bottom"
                 isLocked={true}
                 text={`${item.name} (низ)`}
                 price={item.price}
                 thumbnail={item.image}
-                key={item._id}
+                key={item.constructorId}
               />
             }
           })}
@@ -107,7 +96,7 @@ function BurgerConstructor() {
             </span>
           </p>
           <div className='ml-10'>
-            <Button type="primary" size="large" onClick={() => popupContentOrder(itemIds)}>Оформить заказ</Button>
+            <Button type="primary" size="large" onClick={() => popupContentOrder(ingredientsConstructor.constructorId)}>Оформить заказ</Button>
           </div>
         </li>
       </ul>

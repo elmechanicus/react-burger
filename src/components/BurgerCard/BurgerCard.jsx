@@ -1,18 +1,21 @@
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import cardStyle from './burgerCard.module.css';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addIngredient } from '../../features/burgerConstructor/burgerConstructorSlice';
 import { viewIngredientDetails } from '../../features/ingredientsDetails/ingredientsDetailsSlice';
 import { openPopup } from '../../features/popup/popupSlice';
 
 
-function BurgerCard(props) {
-  const { burgerCard } = props;
+function BurgerCard({ burgerCard }) {
   const dispatch = useDispatch();
+  const isBun = useSelector(state => state.burgerConstructor.isBun);
   
-  const addIngredientHandler = (id) => {
-    dispatch(addIngredient(id));
+
+  const addIngredientHandler = (card) => {
+    if (isBun && card.type === 'bun') {
+      console.log('Булочка уже выбрана!')
+    } else dispatch(addIngredient(card));
   }
 
   const onClickIngredient = (burgerCard) => {
@@ -33,7 +36,7 @@ function BurgerCard(props) {
         <CurrencyIcon type="primary" />
       </div>
       <div className={`${cardStyle.cardTitle}`}>
-        <p className={`text text_type_main-default ${cardStyle.cardTitleText}`} onClick={() => addIngredientHandler(burgerCard._id)}>{burgerCard.name}</p>
+        <p className={`text text_type_main-default ${cardStyle.cardTitleText}`} onClick={() => addIngredientHandler(burgerCard)}>{burgerCard.name}</p>
       </div>
     </li>
   )

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-  selectedIngredients: ["60d3b41abdacab0026a733c6", "60d3b41abdacab0026a733d1", "60d3b41abdacab0026a733cf", "60d3b41abdacab0026a733d3", "60d3b41abdacab0026a733c9"],
+  selectedIngredients: [],
+  isBun: false,
 }
 
 export const burgerConstructorSlice = createSlice({
@@ -10,10 +11,12 @@ export const burgerConstructorSlice = createSlice({
   initialState,
   reducers: {
     addIngredient: (state, action) => {
-      state.selectedIngredients.push(action.payload)
+      if (action.payload.type === 'bun') state.isBun = true;
+      state.selectedIngredients.push({ ...action.payload, constructorId: (Math.random() * 100000).toFixed(0) })
+
     },
     removeIngredient: (state, action) => {
-      state.selectedIngredients = state.selectedIngredients.filter((ingredientId) => ingredientId !== action.payload)
+      state.selectedIngredients = state.selectedIngredients.filter((item) => item.constructorId !== action.payload)
     }
   },
 })
