@@ -12,6 +12,7 @@ function BurgerConstructor() {
   const dispatch = useDispatch();
   
   const ingredientsConstructor = useSelector(state => state.burgerConstructor.selectedIngredients);
+  const cardIds = ingredientsConstructor.map(item => { return item._id });
 
   const removeIngredientHandler = (id) => {
     dispatch(removeIngredient(id));
@@ -96,7 +97,7 @@ function BurgerConstructor() {
             </span>
           </p>
           <div className='ml-10'>
-            <Button type="primary" size="large" onClick={() => popupContentOrder(ingredientsConstructor.constructorId)}>Оформить заказ</Button>
+            <Button type="primary" size="large" onClick={() => popupContentOrder(cardIds)}>Оформить заказ</Button>
           </div>
         </li>
       </ul>

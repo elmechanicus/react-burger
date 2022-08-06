@@ -6,7 +6,9 @@ import Popup from '../Popup/Popup.jsx';
 import IngredientDetails from '../IngredientDetales/IngredientDetails.jsx';
 import OrderDetales from '../OrderDetales/OrderDetales.jsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { closePopup, closePopupOrder} from '../../features/popup/popupSlice';
+import { closePopup, closePopupOrder } from '../../features/popup/popupSlice';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 
 
@@ -29,13 +31,16 @@ function App() {
 
   return (
     <>
-      <div className={styleApp.appBackground}>
-        <AppHeader />
-        <div className={styleApp.appContent}>
-            <BurgerIngredients />
-            <BurgerConstructor />
+      <DndProvider backend={HTML5Backend}>
+        <div className={styleApp.appBackground}>
+          <AppHeader />
+          <div className={styleApp.appContent}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+          </div>
         </div>
-      </div>
+      </DndProvider>
+        
       {isPopup &&
         (<Popup onEscClose={handleEscClose}>
           <IngredientDetails />
