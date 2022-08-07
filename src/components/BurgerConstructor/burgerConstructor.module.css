@@ -46,13 +46,3 @@ align-items: center;
   margin-left: 9.5px;
 }
 
-.gridDragIcon {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.gridDragIcon:last-of-type {
-  margin-bottom: 0;
-}

@@ -7,9 +7,13 @@ import { useInView } from 'react-intersection-observer';
 import { fetchIngredients } from '../../features/burgerIngredients/burgerIngredientsSlice.js';
 
 
+
+
 function BurgerIngredients() {
   const dispatch = useDispatch();
+
   const ingredients = useSelector(state => state.burgerIngredients.ingredients);
+
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -41,25 +45,25 @@ function BurgerIngredients() {
     <div className={burgerStyles.content}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <NavigationBar current={current} setCurrent={setCurrent} />
-      <div className={`${burgerStyles.scrollBar} mt-10`}>
+      <div className={`${burgerStyles.scrollBar} mt-10`} >
           <h2 id='buns' className='text text_type_main-medium'>Булки</h2>
           <ul ref={bunsRef} className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
             {ingredients.map((element) => {
-              if (element.type === "bun") return <BurgerCard burgerCard={element} key={element._id} /> 
+              if (element.type === "bun") return <BurgerCard burgerCard={element} key={element._id}  />
               })
             }
           </ul>
           <h2 id='sauces' className='text text_type_main-medium'>Соусы</h2>
           <ul ref={saucesRef} className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
             {ingredients.map((element) => {
-                if (element.type === "sauce") return <BurgerCard burgerCard={element} key={element._id} /> 
+              if (element.type === "sauce") return <BurgerCard burgerCard={element} key={element._id}  />
               })
             }
           </ul>
           <h2  id='fillings' className='text text_type_main-medium'>Начинки</h2>
           <ul ref={fillingsRef} className={`pt-6 pb-10 pl-4 ${burgerStyles.gridCard}`}>
             {ingredients.map((element) => {
-                if (element.type === "main") return <BurgerCard burgerCard={element} key={element._id} /> 
+              if (element.type === "main") return <BurgerCard burgerCard={element} key={element._id} /> 
               })
             }
           </ul>
