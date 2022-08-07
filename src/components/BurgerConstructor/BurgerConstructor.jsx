@@ -3,6 +3,7 @@ import ingredientsStyle from './burgerConstructor.module.css';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeIngredient } from '../../features/burgerConstructor/burgerConstructorSlice';
+import { minusCounter } from '../../features/burgerIngredients/burgerIngredientsSlice';
 import { getOrderNumber, setOrderNumber } from '../../features/orderDetails/orderDetailsSlice';
 import { openPopupOrder } from '../../features/popup/popupSlice';
 
@@ -14,8 +15,9 @@ function BurgerConstructor() {
   const ingredientsConstructor = useSelector(state => state.burgerConstructor.selectedIngredients);
   const cardIds = ingredientsConstructor.map(item => { return item._id });
 
-  const removeIngredientHandler = (id) => {
-    dispatch(removeIngredient(id));
+  const removeIngredientHandler = (constructorId, ingredientId) => {
+    dispatch(removeIngredient(constructorId));
+    dispatch(minusCounter(ingredientId));
   }
 
   const popupContentOrder = (ingredientsListIds) => {
@@ -59,9 +61,10 @@ function BurgerConstructor() {
               {ingredientsConstructor.map((item) => {
                 for (let i = 0; i < ingredientsConstructor.length; i++) {
                   if (item.type !== 'bun') {
-                    return <div className={`mb-4 ${ingredientsStyle.gridDragIcon}`} key={item.constructorId}>                        <DragIcon type="primary" />
+                    return <div className={`mb-4 ${ingredientsStyle.gridDragIcon}`} key={item.constructorId}>
+                            <DragIcon type="primary" />
                             <ConstructorElement
-                              handleClose={()=>removeIngredientHandler(item.constructorId)}
+                              handleClose={()=>removeIngredientHandler(item.constructorId, item._id)}
                               text={item.name}
                               price={item.price}
                               thumbnail={item.image}

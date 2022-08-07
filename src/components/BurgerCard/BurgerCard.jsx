@@ -2,7 +2,8 @@ import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import cardStyle from './burgerCard.module.css';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { addIngredient } from '../../features/burgerConstructor/burgerConstructorSlice';
+import { plusCounter } from '../../features/burgerIngredients/burgerIngredientsSlice';
+import { addIngredient} from '../../features/burgerConstructor/burgerConstructorSlice';
 import { viewIngredientDetails } from '../../features/ingredientsDetails/ingredientsDetailsSlice';
 import { openPopup } from '../../features/popup/popupSlice';
 
@@ -15,8 +16,12 @@ function BurgerCard({ burgerCard }) {
   const addIngredientHandler = (card) => {
     if (isBun && card.type === 'bun') {
       console.log('Булочка уже выбрана!')
-    } else dispatch(addIngredient(card));
+    } else {
+      dispatch(addIngredient(card));
+      dispatch(plusCounter(card._id));
+    };
   }
+
 
   const onClickIngredient = (burgerCard) => {
     dispatch(viewIngredientDetails({}));//очищаем данные
@@ -27,7 +32,7 @@ function BurgerCard({ burgerCard }) {
   
   return (
     <li className={`${cardStyle.cardSize}`}>
-      <Counter count={1} size="default" />
+      <Counter count={burgerCard.counter} size="default" />
       <img src={burgerCard.image} alt={burgerCard.name} className={`ml-4 mr-4 ${cardStyle.cardImage}`} onClick={() =>
         onClickIngredient(burgerCard)
       } /> 
@@ -36,7 +41,9 @@ function BurgerCard({ burgerCard }) {
         <CurrencyIcon type="primary" />
       </div>
       <div className={`${cardStyle.cardTitle}`}>
-        <p className={`text text_type_main-default ${cardStyle.cardTitleText}`} onClick={() => addIngredientHandler(burgerCard)}>{burgerCard.name}</p>
+        <p className={`text text_type_main-default ${cardStyle.cardTitleText}`} onClick={() => {
+          addIngredientHandler(burgerCard);
+        }}>{burgerCard.name}</p>
       </div>
     </li>
   )

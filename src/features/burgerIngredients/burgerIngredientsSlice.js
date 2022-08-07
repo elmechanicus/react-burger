@@ -31,7 +31,14 @@ export const burgerIngredientsSlice = createSlice({
   initialState,
   reducers: {
     setIngredients: (state, action) => {
-      state.ingredients = action.payload.data;
+      const ingredientsList = action.payload.data;
+      ingredientsList.forEach(ingredient => state.ingredients.push({ ...ingredient, counter: 0 }) );//добавим счётчик на каждый ингредиент
+    },
+    plusCounter: (state, action) => {
+      state.ingredients[state.ingredients.findIndex(ingredient => { return ingredient._id === action.payload })].counter += 1;
+    },
+    minusCounter: (state, action) => {
+      state.ingredients[state.ingredients.findIndex(ingredient => { return ingredient._id === action.payload })].counter -= 1;
     }
   },
   extraReducers: {
@@ -52,5 +59,5 @@ export const burgerIngredientsSlice = createSlice({
   },
 })
 
-export const { setIngredients } = burgerIngredientsSlice.actions
+export const { setIngredients, plusCounter, minusCounter } = burgerIngredientsSlice.actions
 export default burgerIngredientsSlice.reducer
