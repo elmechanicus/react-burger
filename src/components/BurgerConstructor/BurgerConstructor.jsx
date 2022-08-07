@@ -29,13 +29,13 @@ function BurgerConstructor() {
   
   //соберём все цены ингредиентов в одном массиве
   const burgerConstructorPrice = ingredientsConstructor.map(item => {
-    return item.price
+    return item.type==='bun' ? item.price*2 : item.price
   })
 
   //получим суммарный чек
   const summaryPrice = burgerConstructorPrice.reduce((price, currentPrice) => {
     return price + currentPrice
-  }, 0);
+  }, 0) ;
 
   return (
     <>

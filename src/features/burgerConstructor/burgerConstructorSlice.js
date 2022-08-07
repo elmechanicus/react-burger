@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   selectedIngredients: [],
-  isBun: false,
 }
 
 export const burgerConstructorSlice = createSlice({
@@ -11,7 +10,6 @@ export const burgerConstructorSlice = createSlice({
   initialState,
   reducers: {
     addIngredient: (state, action) => {
-      if (action.payload.type === 'bun') state.isBun = true;
       state.selectedIngredients.push({ ...action.payload, constructorId: (Math.random() * 100000).toFixed(0) })
 
     },
