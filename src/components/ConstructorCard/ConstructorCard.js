@@ -13,7 +13,7 @@ function ConstructorCard({cardElement, index, moveListElement}) {
 
   const [{opacity}, dragElement] = useDrag({
     type: 'elements',
-    item: {index}, 
+    item: { index }, 
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0 : 1
     })
@@ -26,11 +26,11 @@ function ConstructorCard({cardElement, index, moveListElement}) {
       handlerId: monitor.getHandlerId(),
     }
     },
-    hover: (element, monitor) => {
+    hover: (item, monitor) => {
       if (!refElement.current) {
         return
       }
-      const dragIndex = element.index;
+      const dragIndex = item.index;
       const hoverIndex = index;
       if (dragIndex === hoverIndex) {
         return
@@ -44,7 +44,7 @@ function ConstructorCard({cardElement, index, moveListElement}) {
       if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return
 
       moveListElement(dragIndex, hoverIndex);
-      element.index = hoverIndex;
+      item.index = hoverIndex;
         },
   })
 
@@ -56,7 +56,7 @@ function ConstructorCard({cardElement, index, moveListElement}) {
   const dragDropRefElement = dragElement(dropElement(refElement));
 
   return (
-    <div className={`mb-4 ${cardStyle.gridDragIcon}`} style={{opacity}} key={cardElement.constructorId} ref={dragDropRefElement} data-handler-id={handlerId}>
+    <div className={`mb-4 ${cardStyle.gridDragIcon}`} style={{ opacity }} key={cardElement.constructorId} ref={dragDropRefElement} data-handler-id={handlerId}>
             <DragIcon type="primary" />
             <ConstructorElement
               handleClose={()=>removeIngredientHandler(cardElement.constructorId, cardElement._id)}

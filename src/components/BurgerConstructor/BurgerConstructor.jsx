@@ -2,7 +2,7 @@ import {ConstructorElement, CurrencyIcon} from '@ya.praktikum/react-developer-bu
 import ingredientsStyle from './burgerConstructor.module.css'; 
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { addIngredient, removeIngredient } from '../../features/burgerConstructor/burgerConstructorSlice';
+import { addIngredient, removeIngredient, clearConstructor } from '../../features/burgerConstructor/burgerConstructorSlice';
 import { plusCounter, minusCounter } from '../../features/burgerIngredients/burgerIngredientsSlice';
 import { getOrderNumber, setOrderNumber } from '../../features/orderDetails/orderDetailsSlice';
 import { openPopupOrder } from '../../features/popup/popupSlice';
@@ -35,12 +35,11 @@ function BurgerConstructor() {
   const moveBurgerListElement = useCallback((dragIndex, hoverIndex) => {
     const dragElement = ingredientsConstructor[dragIndex];
     const hoverElement = ingredientsConstructor[hoverIndex];
-    dispatch(addIngredient(ingredientsConstructor => {
-      const updatedConstructor = [...ingredientsConstructor];
-      updatedConstructor[dragIndex] = hoverElement;
-      updatedConstructor[hoverIndex] = dragElement;
-      return updatedConstructor
-    }))
+    const updatedConstructor = [...ingredientsConstructor];
+    updatedConstructor[dragIndex] = hoverElement;
+    updatedConstructor[hoverIndex] = dragElement;
+    dispatch(clearConstructor());
+    updatedConstructor.forEach(element=>dispatch(addIngredient(element)))
   }, [ingredientsConstructor, dispatch],
   )
 

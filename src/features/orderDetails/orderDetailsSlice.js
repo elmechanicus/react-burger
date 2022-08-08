@@ -34,11 +34,7 @@ export const orderDetailsSlice = createSlice({
   reducers: {
     setOrderNumber: (state, action) => {
       state.orderNumber = action.payload;
-      console.log(state.orderNumber);
     },
-    // setOrderIds: (state, action) => {
-    //   state.orderIds = action.payload;
-    // },
   },
   extraReducers: {
     [getOrderNumber.pending]: (state) => { 
