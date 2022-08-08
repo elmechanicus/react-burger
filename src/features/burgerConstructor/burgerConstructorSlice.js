@@ -10,11 +10,12 @@ export const burgerConstructorSlice = createSlice({
   initialState,
   reducers: {
     addIngredient: (state, action) => {
-      state.selectedIngredients.push({ ...action.payload, constructorId: (Math.random() * 100000).toFixed(0) })
+      console.log(action.payload)
+      state.selectedIngredients.push(action.payload);
 
     },
     removeIngredient: (state, action) => {
-      state.selectedIngredients = state.selectedIngredients.filter((item) => item.constructorId !== action.payload)
+      state.selectedIngredients = state.selectedIngredients.filter((item) => item.constructorId !== action.payload);
     }
   },
 })

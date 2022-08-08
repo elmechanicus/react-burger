@@ -10,9 +10,12 @@ import { useDrag } from 'react-dnd';
 function BurgerCard({ burgerCard }) {
   const dispatch = useDispatch();
   
-  const [, dragRef] = useDrag({
-    type: 'constructor',
+  const [{opacity}, dragRef] = useDrag({
+    type: 'constructorOfBurger',
     item: burgerCard,
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1
+    }),
   });
 
   const onClickIngredient = (burgerCard) => {
@@ -23,7 +26,7 @@ function BurgerCard({ burgerCard }) {
 
   
   return (
-    <li className={`${cardStyle.cardSize}`} ref={dragRef}>
+    <li className={`${cardStyle.cardSize}`} style={{opacity}} ref={dragRef}>
       <Counter count={burgerCard.counter} size="default" />
       <img src={burgerCard.image} alt={burgerCard.name} className={`ml-4 mr-4 ${cardStyle.cardImage}`} onClick={() =>
         onClickIngredient(burgerCard)
