@@ -1,8 +1,5 @@
-import React from 'react';
-import {Box} from '@ya.praktikum/react-developer-burger-ui-components';
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
 import {BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {Typography} from '@ya.praktikum/react-developer-burger-ui-components';
 import headerStyles from './appHeader.module.css'
 
 

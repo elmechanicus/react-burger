@@ -1,16 +1,37 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import {CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import cardStyle from './burgerCard.module.css';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import {objectIngredientPropTypes} from '../../utils/constants'
+import { useDispatch } from 'react-redux';
+import { viewIngredientDetails } from '../../features/ingredientsDetails/ingredientsDetailsSlice';
+import { openPopup } from '../../features/popup/popupSlice';
+import { useDrag } from 'react-dnd';
+import { objectIngredientPropTypes } from '../../utils/constants'
 
-function BurgerCard(props) {
-  const { burgerCard, onClickIngredient} = props;
+
+function BurgerCard({ burgerCard }) {
+  const dispatch = useDispatch();
+
+  const [{opacity}, dragRef] = useDrag({
+    type: 'constructorOfBurger',
+    item: burgerCard,
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1
+    }),
+  });
+
+  const onClickIngredient = (burgerCard) => {
+    dispatch(viewIngredientDetails({}));//очищаем данные
+    dispatch(viewIngredientDetails(burgerCard));//запихиваем новые данные
+    dispatch(openPopup(true));//открываем попап
+  }
+
+  
   return (
-    <li className={`${cardStyle.cardSize}`}>
-      <Counter count={1} size="default" />
-      <img src={burgerCard.image} alt={burgerCard.name} className={`ml-4 mr-4 ${cardStyle.cardImage}`} onClick={() => onClickIngredient(burgerCard)}/> 
+    <li className={`${cardStyle.cardSize}`} style={{opacity}} ref={dragRef}>
+      <Counter count={burgerCard.counter} size="default" />
+      <img src={burgerCard.image} alt={burgerCard.name} className={`ml-4 mr-4 ${cardStyle.cardImage}`} onClick={() =>
+        onClickIngredient(burgerCard)
+      } /> 
       <div className={`${cardStyle.cardPrice}`}>
         <p className={`text text_type_digits-default mr-2`}>{burgerCard.price}</p>
         <CurrencyIcon type="primary" />
@@ -23,8 +44,7 @@ function BurgerCard(props) {
 }
 
 BurgerCard.propTypes = {
-  burgerCard: objectIngredientPropTypes,
-  onClickIngredient: PropTypes.func.isRequired
+  burgerCard: objectIngredientPropTypes
 }
 
 export default BurgerCard
