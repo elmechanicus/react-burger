@@ -15,3 +15,18 @@ export const objectIngredientPropTypes = PropTypes.shape({
   image_mobile: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired
 })
+
+export const objectConstructorCardPropTypes = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
+  proteins: PropTypes.number.isRequired,
+  calories: PropTypes.number.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
+  constructorId: PropTypes.string.isRequired,
+  fat: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  image_large: PropTypes.string.isRequired,
+  image_mobile: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+})

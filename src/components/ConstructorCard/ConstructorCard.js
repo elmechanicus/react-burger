@@ -1,10 +1,12 @@
+import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import cardStyle from './constructorCard.module.css';
 import { removeIngredient } from '../../features/burgerConstructor/burgerConstructorSlice';
 import { minusCounter } from '../../features/burgerIngredients/burgerIngredientsSlice';
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
-import {useRef} from 'react'
+import { useRef } from 'react'
+import {objectConstructorCardPropTypes} from '../../utils/constants'
 
 
 function ConstructorCard({cardElement, index, moveListElement}) {
@@ -67,6 +69,12 @@ function ConstructorCard({cardElement, index, moveListElement}) {
               />
     </div>
   )
+}
+
+ConstructorCard.propTypes = {
+  cardElement: objectConstructorCardPropTypes,
+  moveListElement: PropTypes.func.isRequired,
+  index: PropTypes.number,
 }
 
 export default ConstructorCard

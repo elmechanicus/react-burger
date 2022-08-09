@@ -10,7 +10,7 @@ import OrderDetales from '../OrderDetales/OrderDetales.jsx';
 import Popup from '../Popup/Popup.jsx';
 import { useDrop } from 'react-dnd';
 import ConstructorCard from '../ConstructorCard/ConstructorCard';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 
 function BurgerConstructor() {
@@ -70,17 +70,16 @@ function BurgerConstructor() {
     const cardOfElement = {...card, constructorId: (Math.random() * 100000).toFixed(0)}
     dispatch(addIngredient(cardOfElement));//вставляем
     dispatch(plusCounter(cardOfElement._id));//плюсуем счётчик
-}
-
-  //соберём все цены ингредиентов в одном массиве
-  const burgerConstructorPrice = ingredientsConstructor.map(item => {
-    return item.type==='bun' ? item.price*2 : item.price
-  })
+  }
 
   //получим суммарный чек
-  const summaryPrice = burgerConstructorPrice.reduce((price, currentPrice) => {
-    return price + currentPrice
-  }, 0) ;
+  const summaryPrice = ingredientsConstructor.map(item => {
+      return item.type === 'bun' ? item.price * 2 : item.price
+    }).reduce((price, currentPrice) => {
+      return price + currentPrice
+    }, 0);
+
+  
 
   return (
     <>

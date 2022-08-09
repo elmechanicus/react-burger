@@ -5,11 +5,12 @@ import { useDispatch } from 'react-redux';
 import { viewIngredientDetails } from '../../features/ingredientsDetails/ingredientsDetailsSlice';
 import { openPopup } from '../../features/popup/popupSlice';
 import { useDrag } from 'react-dnd';
+import { objectIngredientPropTypes } from '../../utils/constants'
 
 
 function BurgerCard({ burgerCard }) {
   const dispatch = useDispatch();
-  
+
   const [{opacity}, dragRef] = useDrag({
     type: 'constructorOfBurger',
     item: burgerCard,
@@ -42,5 +43,8 @@ function BurgerCard({ burgerCard }) {
   )
 }
 
+BurgerCard.propTypes = {
+  burgerCard: objectIngredientPropTypes
+}
 
 export default BurgerCard
