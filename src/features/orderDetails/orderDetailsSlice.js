@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { URL } from '../../utils/constants';
 
 const initialState = {
-  // orderIds: [],
   orderNumber: null,
   status: null,
   error: null,
@@ -47,6 +46,7 @@ export const orderDetailsSlice = createSlice({
     [getOrderNumber.rejected]: (state, action) => { 
       state.status = 'rejected';
       state.error = action.payload;
+      state.orderNumber = null;
       alert(state.error);
     },
   }
