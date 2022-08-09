@@ -73,11 +73,14 @@ function BurgerConstructor() {
   }
 
   //получим суммарный чек
-  const summaryPrice = ingredientsConstructor.map(item => {
+  const summaryPrice = useMemo(() => {
+    ingredientsConstructor.map(item => {
       return item.type === 'bun' ? item.price * 2 : item.price
     }).reduce((price, currentPrice) => {
       return price + currentPrice
     }, 0);
+  }, [ingredientsConstructor]);
+  
 
   
 
