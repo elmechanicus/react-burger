@@ -1,10 +1,9 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import ingredientStyles from './ingredientDetails.module.css';
-import { useSelector } from 'react-redux';
+import {objectIngredientPropTypes} from '../../utils/constants'
 
-
-function IngredientDetails() {
-  const ingredient = useSelector(state => state.ingredientsDetails.ingredientInfo);
-
+function IngredientDetails({ ingredient }) {
   return (
     <div className={`${ingredientStyles.content} mt-10 ml-10 mr-10 mb-15`}>
       <h3 className={`${ingredientStyles.title} text text_type_main-large`}>Детали ингрeдиента</h3>
@@ -21,5 +20,8 @@ function IngredientDetails() {
   )
 }
 
+IngredientDetails.propTypes = {
+  ingredients: objectIngredientPropTypes
+}
 
 export default IngredientDetails

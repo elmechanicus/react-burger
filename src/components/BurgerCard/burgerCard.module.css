@@ -24,7 +24,6 @@
   display: flex;
   align-self: start;
   text-align: center;
-  cursor: pointer;
 }
 
 .cardPrice {
