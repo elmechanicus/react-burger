@@ -45,16 +45,14 @@ export const burgerIngredientsSlice = createSlice({
     [fetchIngredients.pending]: (state) => { 
       state.status = 'loading';
       state.error = null;
-      console.log('Загрузка...');
     },
     [fetchIngredients.fulfilled]: (state) => {
       state.status = 'resolved';
-      console.log('Загрузка завершена!');
     },
     [fetchIngredients.rejected]: (state, action) => {
       state.status = 'rejected';
       state.error = action.payload;
-      console.log(state.error);
+      alert(state.error);
     },
   },
 })

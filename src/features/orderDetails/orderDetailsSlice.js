@@ -40,16 +40,14 @@ export const orderDetailsSlice = createSlice({
     [getOrderNumber.pending]: (state) => { 
       state.status = 'loading';
       state.error = null;
-      console.log('Загрузка данных - ждём ответ...');
     },
     [getOrderNumber.fulfilled]: (state) => { 
       state.status = 'resolved';
-      console.log('Ответ получен!');
     },
     [getOrderNumber.rejected]: (state, action) => { 
       state.status = 'rejected';
       state.error = action.payload;
-      console.log(state.error);
+      alert(state.error);
     },
   }
 })

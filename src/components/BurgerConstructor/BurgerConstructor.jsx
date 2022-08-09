@@ -5,20 +5,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addIngredient, removeIngredient, clearConstructor } from '../../features/burgerConstructor/burgerConstructorSlice';
 import { plusCounter, minusCounter } from '../../features/burgerIngredients/burgerIngredientsSlice';
 import { getOrderNumber, setOrderNumber } from '../../features/orderDetails/orderDetailsSlice';
-import { openPopupOrder } from '../../features/popup/popupSlice';
+import { openPopupOrder, closePopup, closePopupOrder } from '../../features/popup/popupSlice';
+import OrderDetales from '../OrderDetales/OrderDetales.jsx';
+import Popup from '../Popup/Popup.jsx';
 import { useDrop } from 'react-dnd';
 import ConstructorCard from '../ConstructorCard/ConstructorCard';
 import { useCallback } from 'react';
 
 
-
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  
+  const isPopupOrder = useSelector(state => state.popup.popupOrder.isPopupOpened);
   const ingredientsConstructor = useSelector(state => state.burgerConstructor.selectedIngredients);
   const cardIds = ingredientsConstructor.map(item => { return item._id });
-
-
+  
+  const popupClose = () => {
+    dispatch(closePopup(false));
+    dispatch(closePopupOrder(false));
+  };
+  
+  const handleEscClose = (evt) => {
+    evt.key === "Escape" && popupClose();
+  };
   const popupContentOrder = (ingredientsListIds) => {
     dispatch(setOrderNumber(null));//очищаем номер заказа
     dispatch(getOrderNumber(ingredientsListIds));//получаем новый номер
@@ -43,7 +51,6 @@ function BurgerConstructor() {
   }, [ingredientsConstructor, dispatch],
   )
 
-  
   const addIngredientHandler = (card) => {
     if (card.type === 'bun' && ingredientsConstructor.length === 0) {//если прилетает булка и конструктор пустой
       addIngredientCard(card);
@@ -64,7 +71,6 @@ function BurgerConstructor() {
     dispatch(addIngredient(cardOfElement));//вставляем
     dispatch(plusCounter(cardOfElement._id));//плюсуем счётчик
 }
-
 
   //соберём все цены ингредиентов в одном массиве
   const burgerConstructorPrice = ingredientsConstructor.map(item => {
@@ -141,7 +147,13 @@ function BurgerConstructor() {
             </div>
           </li>
       </ul>
-      
+
+      {isPopupOrder && (
+        <Popup onEscClose={handleEscClose}>
+          <OrderDetales />
+        </Popup>
+        )
+      }
     </>
   )
 }

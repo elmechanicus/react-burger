@@ -5,8 +5,9 @@ import BurgerCard from '../BurgerCard/BurgerCard';
 import { useSelector, useDispatch} from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import { fetchIngredients } from '../../features/burgerIngredients/burgerIngredientsSlice.js';
-
-
+import Popup from '../Popup/Popup.jsx';
+import IngredientDetails from '../IngredientDetales/IngredientDetails.jsx';
+import { closePopup, closePopupOrder } from '../../features/popup/popupSlice';
 
 
 function BurgerIngredients() {
@@ -14,6 +15,16 @@ function BurgerIngredients() {
 
   const ingredients = useSelector(state => state.burgerIngredients.ingredients);
 
+  const isPopup = useSelector(state => state.popup.popupIngredient.isPopupOpened);
+
+  const popupClose = () => {
+    dispatch(closePopup(false));
+    dispatch(closePopupOrder(false));
+  };
+  
+  const handleEscClose = (evt) => {
+    evt.key === "Escape" && popupClose();
+  };
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -42,6 +53,7 @@ function BurgerIngredients() {
   
   
   return (
+    <>
     <div className={burgerStyles.content}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
       <NavigationBar current={current} setCurrent={setCurrent} />
@@ -69,6 +81,14 @@ function BurgerIngredients() {
           </ul>
       </div>
     </div>
+
+    {isPopup &&
+        (<Popup onEscClose={handleEscClose}>
+          <IngredientDetails />
+        </Popup>
+        )
+      }
+    </>
   )
 }
 
