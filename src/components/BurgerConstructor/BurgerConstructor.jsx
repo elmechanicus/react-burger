@@ -52,7 +52,6 @@ function BurgerConstructor() {
   )
 
 
-  
   const addIngredientHandler = (card) => {
     if (card.type === 'bun' && ingredientsConstructor.length === 0) {//если прилетает булка и конструктор пустой
       addIngredientCard(card);
@@ -75,14 +74,7 @@ function BurgerConstructor() {
     dispatch(plusCounter(cardOfElement._id));//плюсуем счётчик
   }
 
-  //получим суммарный чек
-<<<<<<< Updated upstream
-  const summaryPrice = ingredientsConstructor.map(item => {
-      return item.type === 'bun' ? item.price * 2 : item.price
-    }).reduce((price, currentPrice) => {
-      return price + currentPrice
-    }, 0);
-=======
+
   const summaryPrice = useMemo(() => {
       return ingredientsConstructor.map(item => {
       return item.type === 'bun' ? item.price * 2 : item.price
@@ -90,10 +82,7 @@ function BurgerConstructor() {
       return price + currentPrice
     }, 0)
   }, [ingredientsConstructor]);
-  
->>>>>>> Stashed changes
 
-  
 
   return (
     <>
