@@ -51,6 +51,8 @@ function BurgerConstructor() {
   }, [ingredientsConstructor, dispatch],
   )
 
+
+  
   const addIngredientHandler = (card) => {
     if (card.type === 'bun' && ingredientsConstructor.length === 0) {//если прилетает булка и конструктор пустой
       addIngredientCard(card);
@@ -62,6 +64,7 @@ function BurgerConstructor() {
       alert('Эта булочка уже выбрана!');
     }
     if (card.type !== 'bun') {
+      
       addIngredientCard(card);
     }
   }
@@ -73,11 +76,22 @@ function BurgerConstructor() {
   }
 
   //получим суммарный чек
+<<<<<<< Updated upstream
   const summaryPrice = ingredientsConstructor.map(item => {
       return item.type === 'bun' ? item.price * 2 : item.price
     }).reduce((price, currentPrice) => {
       return price + currentPrice
     }, 0);
+=======
+  const summaryPrice = useMemo(() => {
+      return ingredientsConstructor.map(item => {
+      return item.type === 'bun' ? item.price * 2 : item.price
+    }).reduce((price, currentPrice) => {
+      return price + currentPrice
+    }, 0)
+  }, [ingredientsConstructor]);
+  
+>>>>>>> Stashed changes
 
   
 
