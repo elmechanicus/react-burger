@@ -53,6 +53,7 @@ function BurgerConstructor() {
 
 
   const addIngredientHandler = (card) => {
+    if (card.type !== 'bun' && ingredientsConstructor.length === 0) alert('Сначала надо выбрать булку!');
     if (card.type === 'bun' && ingredientsConstructor.length === 0) {//если прилетает булка и конструктор пустой
       addIngredientCard(card);
     } else if (card.type === 'bun' && ingredientsConstructor.length > 0 && card._id !== ingredientsConstructor[ingredientsConstructor.findIndex(ingredient => ingredient.type === 'bun')]._id ) { //если прилетает булка, конструктор НЕ пустой и НЕ совпадают IDшники
@@ -61,9 +62,7 @@ function BurgerConstructor() {
       addIngredientCard(card);
     } else if (card.type === 'bun' && ingredientsConstructor.length > 0 && card._id === ingredientsConstructor[ingredientsConstructor.findIndex(ingredient => ingredient.type === 'bun')]._id) {//если прилетает булка, конструктор не пустой и совпадают IDшники
       alert('Эта булочка уже выбрана!');
-    }
-    if (card.type !== 'bun') {
-      
+    } else if (card.type !== 'bun' && ingredientsConstructor.length > 0){
       addIngredientCard(card);
     }
   }
