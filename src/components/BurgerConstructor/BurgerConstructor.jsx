@@ -52,6 +52,7 @@ function BurgerConstructor() {
   )
 
   const addIngredientHandler = (card) => {
+    if (card.type !== 'bun' && ingredientsConstructor.length === 0) alert('Сначала надо выбрать булку!');
     if (card.type === 'bun' && ingredientsConstructor.length === 0) {//если прилетает булка и конструктор пустой
       addIngredientCard(card);
     } else if (card.type === 'bun' && ingredientsConstructor.length > 0 && card._id !== ingredientsConstructor[ingredientsConstructor.findIndex(ingredient => ingredient.type === 'bun')]._id ) { //если прилетает булка, конструктор НЕ пустой и НЕ совпадают IDшники
@@ -61,7 +62,7 @@ function BurgerConstructor() {
     } else if (card.type === 'bun' && ingredientsConstructor.length > 0 && card._id === ingredientsConstructor[ingredientsConstructor.findIndex(ingredient => ingredient.type === 'bun')]._id) {//если прилетает булка, конструктор не пустой и совпадают IDшники
       alert('Эта булочка уже выбрана!');
     }
-    if (card.type !== 'bun') {
+    if (card.type !== 'bun' && ingredientsConstructor.length > 0) {
       addIngredientCard(card);
     }
   }
@@ -74,7 +75,7 @@ function BurgerConstructor() {
 
   //получим суммарный чек
   const summaryPrice = useMemo(() => {
-    ingredientsConstructor.map(item => {
+    return ingredientsConstructor.map(item => {
       return item.type === 'bun' ? item.price * 2 : item.price
     }).reduce((price, currentPrice) => {
       return price + currentPrice
