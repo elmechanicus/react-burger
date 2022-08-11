@@ -82,8 +82,6 @@ function BurgerConstructor() {
   }, [ingredientsConstructor]);
   
 
-  
-
   return (
     <>
       <ul className={`${ingredientsStyle.grid} ml-10 pt-25 pl-4`}>
@@ -162,4 +160,3 @@ function BurgerConstructor() {
 
 
 export default BurgerConstructor;
-

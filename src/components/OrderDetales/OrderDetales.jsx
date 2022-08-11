@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import contentStyles from './orderDetales.module.css';
 import {CheckMarkIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
+
 function OrderDetales() {
   const orderNumber = useSelector(state => state.orderDetails.orderNumber);
 
@@ -19,4 +20,3 @@ function OrderDetales() {
 
 
 export default OrderDetales
-

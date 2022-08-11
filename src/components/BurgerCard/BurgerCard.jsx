@@ -25,7 +25,6 @@ function BurgerCard({ burgerCard }) {
     dispatch(openPopup(true));//открываем попап
   }
 
-  
   return (
     <li className={`${cardStyle.cardSize}`} style={{opacity}} ref={dragRef}>
       <Counter count={burgerCard.counter} size="default" />
