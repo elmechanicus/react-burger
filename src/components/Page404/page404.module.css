@@ -1,0 +1,18 @@
+.notFound {
+  margin: 100px auto 20px;
+  width: 800px;
+  height: 599px;
+  background-image: url(../../image/404.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.link {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  text-decoration-line: none;
+  text-transform: uppercase;
+  color: whitesmoke;
+}

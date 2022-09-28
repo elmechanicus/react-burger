@@ -1,7 +1,7 @@
 import AppHeader from '../AppHeader/AppHeader.jsx';
 import styleApp from './app.module.css';
 import { Route, Routes } from 'react-router-dom';
-import { HomePage, LoginPage } from '../../pages/index.js';
+import { HomePage, LoginPage, PageNotFound } from '../../pages/index.js';
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Route path='/reset-password' />
         <Route path='/profile' />
         <Route path='/ingredients/:id' />
-        <Route path='*' />
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </>
   );

@@ -7,13 +7,11 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 export function HomePage() {
   return (
-    <>
       <DndProvider backend={HTML5Backend}>
         <div className={styleHome.homeContent}>
           <BurgerIngredients />
           <BurgerConstructor />
         </div>
       </DndProvider>
-    </>
   )
 }
