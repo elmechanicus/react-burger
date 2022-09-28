@@ -13,6 +13,12 @@ import { closePopup, closePopupOrder } from '../../features/popup/popupSlice';
 function BurgerIngredients() {
   const dispatch = useDispatch();
 
+
+  useEffect(() => {
+    dispatch(fetchIngredients());
+  }, [dispatch]);
+  
+
   const ingredients = useSelector(state => state.burgerIngredients.ingredients);
 
   const isPopup = useSelector(state => state.popup.popupIngredient.isPopupOpened);
@@ -25,10 +31,6 @@ function BurgerIngredients() {
   const handleEscClose = (evt) => {
     evt.key === "Escape" && popupClose();
   };
-
-  useEffect(() => {
-    dispatch(fetchIngredients());
-  }, [dispatch])
 
   const [current, setCurrent] = useState('Булки');
 

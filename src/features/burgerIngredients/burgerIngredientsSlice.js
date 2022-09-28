@@ -31,6 +31,7 @@ export const burgerIngredientsSlice = createSlice({
   initialState,
   reducers: {
     setIngredients: (state, action) => {
+      state.ingredients.length = 0;
       const ingredientsList = action.payload.data;
       ingredientsList.forEach(ingredient => state.ingredients.push({ ...ingredient, counter: 0 }) );//добавим счётчик на каждый ингредиент
     },
