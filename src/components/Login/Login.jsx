@@ -18,7 +18,7 @@ export function Login() {
     <>
       <EmailInput onChange={onChangeEmail} value={emailValue} name={'email'} />
       <PasswordInput onChange={onChangePass} value={passValue} name={'password'} />
-      <Button type='primary' size='large'>
+      <Button type='primary' size='large' htmlType='submit'>
         Войти
       </Button>
     </>

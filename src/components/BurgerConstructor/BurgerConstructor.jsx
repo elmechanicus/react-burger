@@ -144,7 +144,7 @@ function BurgerConstructor() {
               </span>
             </p>
             <div className='ml-10'>
-              <Button type="primary" size="large" onClick={() => popupContentOrder(cardIds)}>Оформить заказ</Button>
+              <Button type="primary" size="large" htmlType='submit' onClick={() => popupContentOrder(cardIds)}>Оформить заказ</Button>
             </div>
           </li>
       </ul>

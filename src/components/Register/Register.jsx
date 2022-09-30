@@ -30,7 +30,7 @@ export function Register() {
     />
       <EmailInput onChange={onChangeEmail} value={emailValue} name={'Email'} />
       <PasswordInput onChange={onChangePass} value={passValue} name={'Password'} />
-      <Button type='primary' size='large'>
+      <Button type='primary' size='large' htmlType='submit'>
         Зарегистрироваться
       </Button>
     </>
