@@ -18,6 +18,7 @@ export function Register() {
 
   return (
     <>
+      <h2 className='text text_type_main-medium'>Регистрация</h2>
       <Input
       type={'text'}
       placeholder={'Ваше имя'}
@@ -33,6 +34,7 @@ export function Register() {
       <Button type='primary' size='large' htmlType='submit'>
         Зарегистрироваться
       </Button>
+      <p className='text text_type_main-default text_color_inactive'>Уже зарегистрированы? Войти</p>
     </>
   )
 }
