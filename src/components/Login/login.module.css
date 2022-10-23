@@ -7,11 +7,39 @@
 
 .register {
   display: flex;
-  padding: 0;
-  margin-top: -16px;
 }
 
 .text {
   display: flex;
   align-self: center;
+}
+
+.button__button {
+    font-family: 'Jet Brains Mono';
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: normal;
+    padding: 0;
+    color: var(--colors-interface-accent);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: var(--common-transition);
+}
+
+.button_size_medium {
+      
+}
+
+.button_type_secondary {
+    
+}
+
+.button {
+    
+}
+
+.button__button:hover {
+  color: var(--text-primary-color);
 }

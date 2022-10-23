@@ -1,11 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import loginClass from './login.module.css';
 
 
 export function Login() {
+  const navigate = useNavigate();
 
-  const [emailValue, setEmailValue] = React.useState('')
+  const [emailValue, setEmailValue] = React.useState('Введите свой e-mail')
   const onChangeEmail = e => {
     setEmailValue(e.target.value)
   }
@@ -14,6 +16,19 @@ export function Login() {
   const onChangePass = e => {
     setPassValue(e.target.value);
   }
+
+  const registration = React.useCallback(
+    () => {
+      navigate('/register');
+      }, [navigate]
+  )
+    
+
+  const forgotPassword = React.useCallback(
+    () => {
+      navigate('/forgot-password');
+    }, [navigate]
+  )
 
   return (
     <form className={`${loginClass.content}`}>
@@ -29,13 +44,13 @@ export function Login() {
         Войти
         </Button>
       </div>
-      <div className={`${loginClass.register}`}>
-        <p className={`${loginClass.text} text text_type_main-default text_color_inactive`}>Вы - новый пользователь?</p>
-        <div className={`${loginClass.button}`}><Button type='secondary' size='medium' htmlType='button'>Зарегистрироваться</Button></div>
+      <div className={`${loginClass.register} mb-4`}>
+        <p className={`${loginClass.text} text text_type_main-default text_color_inactive mr-2`}>Вы - новый пользователь?</p>
+        <Button className={loginClass.button__button} onClick={registration} htmlType='button'>Зарегистрироваться</Button>
       </div>
       <div className={`${loginClass.register}`}>
-        <p className={`${loginClass.text} text text_type_main-default text_color_inactive`}>Забыли пароль? </p>
-        <div className={`${loginClass.button}`}><Button type='secondary' size='medium' htmlType='button'>Восстановить пароль</Button></div>
+        <p className={`${loginClass.text} text text_type_main-default text_color_inactive mr-2`}>Забыли пароль? </p>
+      <Button className={loginClass.button__button} onClick={forgotPassword} htmlType='button'>Восстановить пароль</Button>
       </div>
       
     </form>
