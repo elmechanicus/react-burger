@@ -46,13 +46,12 @@ export function Login() {
       </div>
       <div className={`${loginClass.register} mb-4`}>
         <p className={`${loginClass.text} text text_type_main-default text_color_inactive mr-2`}>Вы - новый пользователь?</p>
-        <Button className={loginClass.button__button} onClick={registration} htmlType='button'>Зарегистрироваться</Button>
+        <Button className={loginClass.button__newButton} onClick={registration} htmlType='button'>Зарегистрироваться</Button>
       </div>
       <div className={`${loginClass.register}`}>
         <p className={`${loginClass.text} text text_type_main-default text_color_inactive mr-2`}>Забыли пароль? </p>
-      <Button className={loginClass.button__button} onClick={forgotPassword} htmlType='button'>Восстановить пароль</Button>
+        <Button className={loginClass.button__newButton} onClick={forgotPassword} htmlType='button'>Восстановить пароль</Button>
       </div>
-      
     </form>
   )
 }

@@ -14,7 +14,7 @@
   align-self: center;
 }
 
-.button__button {
+.button__newButton {
     font-family: 'Jet Brains Mono';
     font-size: 16px;
     line-height: 1.5;
@@ -28,18 +28,6 @@
     transition: var(--common-transition);
 }
 
-.button_size_medium {
-      
-}
-
-.button_type_secondary {
-    
-}
-
-.button {
-    
-}
-
-.button__button:hover {
+.button__newButton:hover {
   color: var(--text-primary-color);
 }
