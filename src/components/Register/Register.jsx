@@ -19,7 +19,7 @@ export function Register() {
 
   const [nameValue, setNameValue] = React.useState('');
 
-  const enter = React.useCallback(
+  const comeIn = React.useCallback(
     () => {
       navigate(-1);
     }, [navigate]
@@ -53,7 +53,7 @@ export function Register() {
       </div>
       <div className={`${registerClass.register} mb-4`}>
         <p className={`${registerClass.text} text text_type_main-default text_color_inactive mr-2`}>Уже зарегистрированы?</p>
-        <Button className={registerClass.button__newButton} onClick={enter} htmlType='button'>Войти</Button>
+        <Button className={registerClass.button__newButton} onClick={comeIn} htmlType='button'>Войти</Button>
       </div>
     </form>
   )
