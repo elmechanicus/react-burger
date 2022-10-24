@@ -1,0 +1,37 @@
+.main {
+  display: flex;
+  margin: 120px auto 0;
+  max-width: 1240px;
+  width: 100%;
+}
+
+.column__center {
+  display: flex;
+  max-width: 480px;
+  width: 100%;
+}
+
+.column__lateral {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  width: 100%;
+  list-style: none;
+}
+
+.column__text {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  color: #8585AD;
+}
+
+.column__menu {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 64px;
+}
