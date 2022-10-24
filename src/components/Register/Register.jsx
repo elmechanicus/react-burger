@@ -52,7 +52,7 @@ export function Register() {
         </Button>
       </div>
       <div className={`${registerClass.register} mb-4`}>
-        <p className={`${registerClass.text} text text_type_main-default text_color_inactive mr-2`}>Уже зарегистрированы</p>
+        <p className={`${registerClass.text} text text_type_main-default text_color_inactive mr-2`}>Уже зарегистрированы?</p>
         <Button className={registerClass.button__newButton} onClick={enter} htmlType='button'>Войти</Button>
       </div>
     </form>
