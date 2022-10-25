@@ -5,21 +5,23 @@
   width: 100%;
 }
 
-.column__center {
-  display: flex;
-  max-width: 480px;
-  width: 100%;
-}
-
-.column__lateral {
+.column {
   margin-top: 0;
   margin-bottom: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  max-width: 320px;
   width: 100%;
   list-style: none;
+}
+
+.column__center {
+  max-width: 480px;
+  width: 100%;
+}
+
+.column__lateral {
+  max-width: 320px;
 }
 
 .column__text {
