@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 import {BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import headerStyles from './appHeader.module.css'
 
+const inActive = (isActive) => isActive ? 'text_color_inactive' : '';
 
 function AppHeader() {
   return (
@@ -22,8 +23,9 @@ function AppHeader() {
           <Logo />
         </div>
         <div className={`${headerStyles.nav__link} pl-5 pr-5 pt-4 pb-4`}>
-          <ProfileIcon type="secondary" />
-          <p className={`text text_type_main-default ml-2 text_color_inactive`}>Личный кабинет</p>
+          <ProfileIcon type="primary" />
+          <NavLink to="/profile" className={`text text_type_main-default ml-2 ${inActive}`}>Личный кабинет
+          </NavLink>
         </div>
       </div>
     </header>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import resetClass from './resetPassword.module.css';
 
 
@@ -17,6 +17,23 @@ export function ResetPassword() {
     setNewPassValue(e.target.value);
   }
 
+
+  const newPassword = async (password, emailCode) => {
+    await fetch(`${URL}password-reset/reset`, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        "password": password,
+        "token": emailCode}),
+    })
+      .then((res) => {
+        if (!res.ok) { throw new Error(`Упс! Что-то пошло не так... ошибка: ${res.status}`); }
+        return res.json();
+      })
+      .catch((err)=>{console.log(err)})
+  }
+
+
   const comeIn = React.useCallback(
     () => {
       navigate(-2);
@@ -27,13 +44,13 @@ export function ResetPassword() {
     <form className={`${resetClass.content}`}>
       <h2 className='text text_type_main-medium mb-6'>Восстановление пароля</h2>
       <div className='mb-6'>
-        <PasswordInput onChange={onChangeNewPass} value={newPassValue} name={'newPassword'} />
+        <Input type={'password'} placeholder={'Введите новый пароль'} onChange={onChangeNewPass} value={newPassValue} name={'newPassword'} />
       </div>
       <div className='mb-6'>
         <Input type='text' onChange={onChangeCode} value={codeValue} name={'code'} placeholder='Введите код из письма'/>
       </div>
       <div className="mb-20">
-        <Button type='primary' size='large' htmlType='submit'>
+        <Button type='primary' size='large' htmlType='submit' onClick={()=>{newPassword(newPassValue, codeValue)}}>
         Сохранить
         </Button>
       </div>

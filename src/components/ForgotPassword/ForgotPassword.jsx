@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import forgotPassClass from './forgotPassword.module.css';
 import { useNavigate } from 'react-router-dom';
+import { URL } from '../../utils/constants';
 
 
 export function ForgotPassword() {
@@ -9,9 +10,27 @@ export function ForgotPassword() {
   const navigate = useNavigate();
 
   const [emailValue, setEmailValue] = React.useState('')
+  
   const onChangeEmail = e => {
-    setEmailValue(e.target.value)
+    setEmailValue(e.target.value);
   }
+
+
+
+  //написать POST и получить ответ
+  const recoverPassword = async (emailForRecover) => {
+    await fetch(`${URL}password-reset`, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ "email": emailForRecover}),
+    })
+    .then((res) => {
+      if (!res.ok) { throw new Error(`Упс! Что-то пошло не так... ошибка: ${res.status}`); }
+      return res.json();
+    })
+    .catch ((err)=>{console.log(err)})
+  }
+
 
   const comeIn = React.useCallback(
     () => {
@@ -28,7 +47,7 @@ export function ForgotPassword() {
         <EmailInput onChange={onChangeEmail} value={emailValue} name={'e-mail'} placeholder='Укажите e-mail'/>
       </div>
       <div className="mb-20">
-        <Button type='primary' size='large' htmlType='submit'>
+        <Button type='primary' size='large' htmlType='submit' onClick={() => recoverPassword(emailValue)}>
         Восстановить
         </Button>
       </div>
