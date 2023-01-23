@@ -1,0 +1,8 @@
+.nav__link {
+  display: flex;
+  align-items: center;
+}
+
+.none__line {
+  text-decoration: none;
+}
