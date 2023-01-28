@@ -2,10 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import registerClass from './register.module.css';
+import { useDispatch } from 'react-redux';
+import { getUserInfo } from '../../features/register/registerSlice';
 
 
 export function Register() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [emailValue, setEmailValue] = React.useState('Введите свой e-mail')
   const onChangeEmail = e => {
@@ -18,12 +21,21 @@ export function Register() {
   }
 
   const [nameValue, setNameValue] = React.useState('');
+  const onChangeName = e => {
+    setNameValue(e.target.value);
+  }
 
   const comeIn = React.useCallback(
     () => {
       navigate(-1);
     }, [navigate]
   )
+
+  const registerNewUser = (e) => {
+    e.preventDefault();
+    console.log(emailValue, passValue, nameValue);
+    dispatch(getUserInfo(emailValue, passValue, nameValue))
+  }
 
   return (
     <form className={`${registerClass.content}`}>
@@ -32,7 +44,7 @@ export function Register() {
         <Input
           type={'text'}
           placeholder={'Ваше имя'}
-          onChange={e => setNameValue(e.target.value)}
+          onChange={onChangeName}
           value={nameValue}
           name={'Name'}
           error={false}
@@ -47,7 +59,7 @@ export function Register() {
         <PasswordInput onChange={onChangePass} value={passValue} name={'Password'} />
       </div>
       <div className="mb-20">
-        <Button type='primary' size='large' htmlType='submit'>
+        <Button type='primary' size='large' htmlType='submit' onClick={registerNewUser}>
         Зарегистрироваться
         </Button>
       </div>

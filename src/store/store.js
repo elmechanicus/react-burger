@@ -4,6 +4,7 @@ import burgerIngredientsSlice from "../features/burgerIngredients/burgerIngredie
 import ingredientsDetailsSlice from "../features/ingredientsDetails/ingredientsDetailsSlice";
 import orderDetailsSlice from "../features/orderDetails/orderDetailsSlice";
 import popupSlice from "../features/popup/popupSlice";
+import registerSlice from '../features/register/registerSlice'
 
 
 export const store = configureStore({
@@ -13,5 +14,6 @@ export const store = configureStore({
     ingredientsDetails: ingredientsDetailsSlice,
     orderDetails: orderDetailsSlice,
     popup: popupSlice,
+    registerUser: registerSlice,
   },
 })
