@@ -2,13 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import registerClass from './register.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserInfo } from '../../features/register/registerSlice';
 
 
 export function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const userIformation = useSelector(state => state.registerUser)
 
   const [emailValue, setEmailValue] = React.useState('Введите свой e-mail')
   const onChangeEmail = e => {
@@ -31,10 +32,14 @@ export function Register() {
     }, [navigate]
   )
 
-  const registerNewUser = (e) => {
-    e.preventDefault();
-    console.log(emailValue, passValue, nameValue);
-    dispatch(getUserInfo(emailValue, passValue, nameValue))
+
+  const registerNewUser = (email, password, username) => {
+    const userInfo = {
+      email: email,
+      password: password,
+      name: username
+    }
+    dispatch(getUserInfo(userInfo));
   }
 
   return (
@@ -59,7 +64,7 @@ export function Register() {
         <PasswordInput onChange={onChangePass} value={passValue} name={'Password'} />
       </div>
       <div className="mb-20">
-        <Button type='primary' size='large' htmlType='submit' onClick={registerNewUser}>
+        <Button type='primary' size='large' htmlType='submit' onClick={() => registerNewUser(emailValue, passValue, nameValue)}>
         Зарегистрироваться
         </Button>
       </div>

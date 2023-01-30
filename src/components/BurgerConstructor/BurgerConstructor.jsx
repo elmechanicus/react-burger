@@ -27,6 +27,7 @@ function BurgerConstructor() {
   const handleEscClose = (evt) => {
     evt.key === "Escape" && popupClose();
   };
+  
   const popupContentOrder = (ingredientsListIds) => {
     dispatch(setOrderNumber(null));//очищаем номер заказа
     dispatch(getOrderNumber(ingredientsListIds));//получаем новый номер
